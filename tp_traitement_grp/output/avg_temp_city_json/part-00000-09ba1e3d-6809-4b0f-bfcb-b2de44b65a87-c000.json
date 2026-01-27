@@ -1,0 +1,669 @@
+{"Country":"Russia","City":"Abakan","avg_temperature":-0.5518135520069047}
+{"Country":"Russia","City":"Achinsk","avg_temperature":-1.0507155804920152}
+{"Country":"Russia","City":"Almetyevsk","avg_temperature":2.7900932527052804}
+{"Country":"Russia","City":"Angarsk","avg_temperature":-1.8229080707811787}
+{"Country":"Russia","City":"Arkhangelsk","avg_temperature":0.32794030322173096}
+{"Country":"Russia","City":"Armavir","avg_temperature":10.020106938255893}
+{"Country":"Russia","City":"Arzamas","avg_temperature":3.842590334807331}
+{"Country":"Russia","City":"Astrakhan","avg_temperature":9.936537688442208}
+{"Country":"Paraguay","City":"Asunción","avg_temperature":22.66188645038166}
+{"Country":"Russia","City":"Balakovo","avg_temperature":4.395683004455763}
+{"Country":"Russia","City":"Balashikha","avg_temperature":3.999710675931771}
+{"Country":"Russia","City":"Barnaul","avg_temperature":0.44716918429003066}
+{"Country":"Russia","City":"Bataysk","avg_temperature":8.908760986405287}
+{"Country":"Russia","City":"Belgorod","avg_temperature":6.088637081490845}
+{"Country":"Russia","City":"Berezniki","avg_temperature":1.0170620623806494}
+{"Country":"Russia","City":"Biysk","avg_temperature":1.4703470004315924}
+{"Country":"Russia","City":"Blagoveshchensk","avg_temperature":-0.7202628398791568}
+{"Country":"Russia","City":"Bratsk","avg_temperature":-2.8179848942598165}
+{"Country":"Russia","City":"Bryansk","avg_temperature":4.632616550852813}
+{"Country":"Paraguay","City":"Capiatá","avg_temperature":22.814546278625983}
+{"Country":"Russia","City":"Cheboksary","avg_temperature":3.34514172730149}
+{"Country":"Russia","City":"Chelyabinsk","avg_temperature":2.018291354125541}
+{"Country":"Russia","City":"Cherepovets","avg_temperature":2.821191724573593}
+{"Country":"Russia","City":"Cherkessk","avg_temperature":7.460634954193121}
+{"Country":"Russia","City":"Chita","avg_temperature":-4.360299956840743}
+{"Country":"Russia","City":"Derbent","avg_temperature":10.496742512641003}
+{"Country":"Russia","City":"Dimitrovgrad","avg_temperature":3.3325101845958027}
+{"Country":"Russia","City":"Dzerzhinsk","avg_temperature":3.3827346809854686}
+{"Country":"Yemen","City":"Aden","avg_temperature":25.54778723404254}
+{"Country":"Senegal","City":"Dakar","avg_temperature":24.6275202991453}
+{"Country":"Senegal","City":"Diourbel","avg_temperature":27.410561965811958}
+{"Country":"Burma","City":"Akyab","avg_temperature":25.722316350710887}
+{"Country":"Philippines","City":"Angeles","avg_temperature":26.448334487877297}
+{"Country":"Philippines","City":"Antipolo","avg_temperature":26.448334487877297}
+{"Country":"Eritrea","City":"Asmara","avg_temperature":24.001515877771144}
+{"Country":"Philippines","City":"Bacolod","avg_temperature":27.137616648992527}
+{"Country":"Philippines","City":"Bacoor","avg_temperature":26.448334487877297}
+{"Country":"Burma","City":"Bago","avg_temperature":26.55286920332942}
+{"Country":"Philippines","City":"Baguio","avg_temperature":25.104723404255346}
+{"Country":"Philippines","City":"Baliuag","avg_temperature":26.448334487877297}
+{"Country":"Philippines","City":"Batangas","avg_temperature":26.400379865075287}
+{"Country":"Philippines","City":"Binangonan","avg_temperature":26.400379865075287}
+{"Country":"Philippines","City":"Bulaon","avg_temperature":26.448334487877297}
+{"Country":"Philippines","City":"Butuan","avg_temperature":26.126170506912505}
+{"Country":"Philippines","City":"Cabanatuan","avg_temperature":26.448334487877297}
+{"Country":"Philippines","City":"Cadiz","avg_temperature":27.137616648992527}
+{"Country":"Philippines","City":"Cagayan De Oro","avg_temperature":26.4908165584415}
+{"Country":"Philippines","City":"Cainta","avg_temperature":26.448334487877297}
+{"Country":"Philippines","City":"Calamba","avg_temperature":26.400379865075287}
+{"Country":"Philippines","City":"Cavite","avg_temperature":26.448334487877297}
+{"Country":"Philippines","City":"Cebu","avg_temperature":27.137616648992527}
+{"Country":"Philippines","City":"Cotabato","avg_temperature":26.362624505928878}
+{"Country":"Philippines","City":"Dadiangas","avg_temperature":27.05580937499998}
+{"Country":"Philippines","City":"Dagupan","avg_temperature":25.104723404255346}
+{"Country":"Philippines","City":"Dasmariñas","avg_temperature":26.400379865075287}
+{"Country":"Philippines","City":"Davao","avg_temperature":25.90448233106017}
+{"Country":"Burma","City":"Dawei","avg_temperature":26.20766592526698}
+{"Country":"Philippines","City":"Digos","avg_temperature":25.90448233106017}
+{"Country":"Philippines","City":"Dumaguete","avg_temperature":26.4908165584415}
+{"Country":"Malaysia","City":"Alor Setar","avg_temperature":27.212006301502615}
+{"Country":"Malaysia","City":"Ayer Itam","avg_temperature":27.212006301502615}
+{"Country":"Malaysia","City":"Bandar Maharani","avg_temperature":26.566326510721225}
+{"Country":"Malaysia","City":"Bandar Penggaram","avg_temperature":26.11456822612089}
+{"Country":"Malaysia","City":"Bintulu","avg_temperature":26.156729436109686}
+{"Country":"Malaysia","City":"Bukit Mertajam","avg_temperature":27.212006301502615}
+{"Country":"Malaysia","City":"Butterworth","avg_temperature":27.212006301502615}
+{"Country":"Turkey","City":"Çorlu","avg_temperature":13.319012318382846}
+{"Country":"Turkey","City":"Çorum","avg_temperature":9.957552993916114}
+{"Country":"Turkey","City":"Adana","avg_temperature":18.708699324324375}
+{"Country":"Turkey","City":"Afyonkarahisar","avg_temperature":11.131511367275056}
+{"Country":"Turkey","City":"Aksaray","avg_temperature":11.220228601997153}
+{"Country":"Turkey","City":"Alanya","avg_temperature":18.234295422031504}
+{"Country":"Turkey","City":"Ankara","avg_temperature":10.39211714770797}
+{"Country":"Turkey","City":"Antakya","avg_temperature":18.708699324324375}
+{"Country":"Turkey","City":"Antalya","avg_temperature":11.881128303198892}
+{"Country":"Turkey","City":"Batman","avg_temperature":15.24783582089553}
+{"Country":"Turkey","City":"Bursa","avg_temperature":11.504880611270295}
+{"Country":"Turkey","City":"Denizli","avg_temperature":15.045692923471007}
+{"Country":"Turkey","City":"Edirne","avg_temperature":11.147479153506024}
+{"Country":"Malawi","City":"Blantyre","avg_temperature":22.71825896656536}
+{"Country":"Iraq","City":"Baghdad","avg_temperature":22.61434568965519}
+{"Country":"Iraq","City":"Dahuk","avg_temperature":19.01354684275691}
+{"Country":"Germany","City":"Aachen","avg_temperature":8.8251727732154}
+{"Country":"Germany","City":"Augsburg","avg_temperature":4.642939039797854}
+{"Country":"Germany","City":"Bergisch Gladbach","avg_temperature":8.8251727732154}
+{"Country":"Germany","City":"Berlin","avg_temperature":8.916233733417545}
+{"Country":"Germany","City":"Bielefeld","avg_temperature":8.985125078964007}
+{"Country":"Germany","City":"Bochum","avg_temperature":8.985125078964007}
+{"Country":"Germany","City":"Bonn","avg_temperature":8.8251727732154}
+{"Country":"Germany","City":"Bottrop","avg_temperature":8.985125078964007}
+{"Country":"Germany","City":"Bremen","avg_temperature":8.327234365129488}
+{"Country":"Germany","City":"Bremerhaven","avg_temperature":8.327234365129488}
+{"Country":"Germany","City":"Brunswick","avg_temperature":8.44905464308277}
+{"Country":"Germany","City":"Chemnitz","avg_temperature":8.233430195830703}
+{"Country":"Germany","City":"Cologne","avg_temperature":8.8251727732154}
+{"Country":"Germany","City":"Cottbus","avg_temperature":8.916233733417545}
+{"Country":"Germany","City":"Düsseldorf","avg_temperature":8.8251727732154}
+{"Country":"Germany","City":"Darmstadt","avg_temperature":8.15924352495262}
+{"Country":"Germany","City":"Dortmund","avg_temperature":8.985125078964007}
+{"Country":"Germany","City":"Dresden","avg_temperature":8.233430195830703}
+{"Country":"Germany","City":"Duisburg","avg_temperature":8.8251727732154}
+{"Country":"Afghanistan","City":"Baglan","avg_temperature":10.790278244631194}
+{"Country":"France","City":"Aix En Provence","avg_temperature":11.36542482627922}
+{"Country":"France","City":"Amiens","avg_temperature":10.402644346178146}
+{"Country":"France","City":"Angers","avg_temperature":11.238212886923536}
+{"Country":"France","City":"Besançon","avg_temperature":8.886696462413148}
+{"Country":"France","City":"Bordeaux","avg_temperature":12.139361655085258}
+{"Country":"France","City":"Boulogne Billancourt","avg_temperature":10.402644346178146}
+{"Country":"France","City":"Brest","avg_temperature":11.270614339861023}
+{"Country":"France","City":"Caen","avg_temperature":10.18834333543904}
+{"Country":"France","City":"Clermont Ferrand","avg_temperature":8.80143777637397}
+{"Country":"France","City":"Dijon","avg_temperature":8.886696462413148}
+{"Country":"Greece","City":"Athens","avg_temperature":17.419485933503847}
+{"Country":"Sri Lanka","City":"Chavakachcheri","avg_temperature":27.602999202551846}
+{"Country":"Sri Lanka","City":"Colombo","avg_temperature":25.929521132376422}
+{"Country":"Taiwan","City":"Chungho","avg_temperature":21.124517874396126}
+{"Country":"Taiwan","City":"Chupei","avg_temperature":21.124517874396126}
+{"Country":"Algeria","City":"Algiers","avg_temperature":16.431711956521738}
+{"Country":"Equatorial Guinea","City":"Bata","avg_temperature":24.86318443804032}
+{"Country":"Algeria","City":"Constantine","avg_temperature":14.942070971867013}
+{"Country":"Slovakia","City":"Bratislava","avg_temperature":9.876178142766877}
+{"Country":"Argentina","City":"Bahia Blanca","avg_temperature":15.110080526315777}
+{"Country":"Argentina","City":"Catamarca","avg_temperature":18.524785263157888}
+{"Country":"Argentina","City":"Comodoro Rivadavia","avg_temperature":10.895853065539125}
+{"Country":"Argentina","City":"Concordia","avg_temperature":18.611306297709906}
+{"Country":"Argentina","City":"Cordoba","avg_temperature":16.913611578947396}
+{"Country":"Argentina","City":"Corrientes","avg_temperature":20.69721230916032}
+{"Country":"Belgium","City":"Antwerp","avg_temperature":9.876367656348693}
+{"Country":"Angola","City":"Benguela","avg_temperature":23.184420138888893}
+{"Country":"Belgium","City":"Brugge","avg_temperature":9.876367656348693}
+{"Country":"Belgium","City":"Brussels","avg_temperature":9.876367656348693}
+{"Country":"Belgium","City":"Charleroi","avg_temperature":9.876367656348693}
+{"Country":"Ecuador","City":"Ambato","avg_temperature":16.912374924288315}
+{"Country":"Ecuador","City":"Cuenca","avg_temperature":21.268912621359206}
+{"Country":"Qatar","City":"Doha","avg_temperature":26.831705193482705}
+{"Country":"Madagascar","City":"Antananarivo","avg_temperature":19.20031083380604}
+{"Country":"Madagascar","City":"Antsirabe","avg_temperature":19.815439024390216}
+{"Country":"Albania","City":"Durrës","avg_temperature":15.525828490208465}
+{"Country":"Ghana","City":"Accra","avg_temperature":26.287347826086958}
+{"Country":"Ghana","City":"Cape Coast","avg_temperature":25.93373913043478}
+{"Country":"Nicaragua","City":"Chinandega","avg_temperature":27.34302164066425}
+{"Country":"Benin","City":"Abomey Calavi","avg_temperature":27.121563068181832}
+{"Country":"Peru","City":"Arequipa","avg_temperature":20.167044004400456}
+{"Country":"Peru","City":"Ayacucho","avg_temperature":10.680055453991473}
+{"Country":"Benin","City":"Bohicon","avg_temperature":27.121563068181832}
+{"Country":"Peru","City":"Cajamarca","avg_temperature":16.891270252754357}
+{"Country":"Peru","City":"Chiclayo","avg_temperature":20.82142544731612}
+{"Country":"Peru","City":"Chimbote","avg_temperature":18.0916177062374}
+{"Country":"Peru","City":"Chincha Alta","avg_temperature":18.950314578005102}
+{"Country":"Peru","City":"Chosica","avg_temperature":16.769119658119664}
+{"Country":"Benin","City":"Cotonou","avg_temperature":27.121563068181832}
+{"Country":"Peru","City":"Cusco","avg_temperature":10.960336023054747}
+{"Country":"Benin","City":"Djougou","avg_temperature":27.01994261363636}
+{"Country":"Russia","City":"Elektrostal","avg_temperature":4.148560328490213}
+{"Country":"Russia","City":"Elista","avg_temperature":9.828698683742447}
+{"Country":"Russia","City":"Engels","avg_temperature":5.831241247612988}
+{"Country":"Paraguay","City":"Fernando De La Mora","avg_temperature":22.814546278625983}
+{"Country":"Russia","City":"Glazov","avg_temperature":0.8506565881604068}
+{"Country":"Russia","City":"Heihe","avg_temperature":-0.7202628398791568}
+{"Country":"Russia","City":"Irkutsk","avg_temperature":-1.8229080707811787}
+{"Country":"Russia","City":"Ivanovo","avg_temperature":3.12503506001264}
+{"Country":"Russia","City":"Izhevsk","avg_temperature":1.492210375556969}
+{"Country":"Russia","City":"Kaliningrad","avg_temperature":7.160081490840195}
+{"Country":"Russia","City":"Kaluga","avg_temperature":4.305852495262154}
+{"Country":"Russia","City":"Kamensk Uralskiy","avg_temperature":2.018291354125541}
+{"Country":"Russia","City":"Kamyshin","avg_temperature":5.4999566592850435}
+{"Country":"Russia","City":"Kansk","avg_temperature":-1.7584113077255037}
+{"Country":"Russia","City":"Kazan","avg_temperature":3.34514172730149}
+{"Country":"Russia","City":"Kemerovo","avg_temperature":0.11109538195943028}
+{"Country":"Russia","City":"Khabarovsk","avg_temperature":-0.03251537070524435}
+{"Country":"Russia","City":"Khimki","avg_temperature":3.999710675931771}
+{"Country":"Russia","City":"Kirov","avg_temperature":1.7441746282821906}
+{"Country":"Russia","City":"Kislovodsk","avg_temperature":7.460634954193121}
+{"Country":"Russia","City":"Kolomna","avg_temperature":4.148560328490213}
+{"Country":"Russia","City":"Kolpino","avg_temperature":3.9180445356917275}
+{"Country":"Russia","City":"Komsomolsk Na Amure","avg_temperature":-2.3709624773960196}
+{"Country":"Russia","City":"Kostroma","avg_temperature":3.12503506001264}
+{"Country":"Russia","City":"Kovrov","avg_temperature":3.3827346809854686}
+{"Country":"Russia","City":"Krasnodar","avg_temperature":10.714457133818401}
+{"Country":"Russia","City":"Krasnoyarsk","avg_temperature":-1.6017906776003474}
+{"Country":"Russia","City":"Kurgan","avg_temperature":1.2775584469227599}
+{"Country":"Russia","City":"Kursk","avg_temperature":4.954656664560955}
+{"Country":"Russia","City":"Kyzyl","avg_temperature":-6.2224518774277255}
+{"Country":"Russia","City":"Leninsk Kuznetskiy","avg_temperature":0.913679758308156}
+{"Country":"Russia","City":"Lipetsk","avg_temperature":4.998207201516104}
+{"Country":"Yemen","City":"Ibb","avg_temperature":25.985855602156974}
+{"Country":"Senegal","City":"Kaolack","avg_temperature":27.602331196581204}
+{"Country":"Sweden","City":"Göteborg","avg_temperature":5.890317435249519}
+{"Country":"Guyana","City":"Georgetown","avg_temperature":26.54984937439856}
+{"Country":"Philippines","City":"Hagonoy","avg_temperature":26.448334487877297}
+{"Country":"Burma","City":"Henzada","avg_temperature":26.735192733017303}
+{"Country":"Philippines","City":"Iligan","avg_temperature":26.4908165584415}
+{"Country":"Philippines","City":"Iloilo","avg_temperature":27.20340668080594}
+{"Country":"Philippines","City":"Jolo","avg_temperature":26.68420826623725}
+{"Country":"Philippines","City":"Kabankalan","avg_temperature":27.137616648992527}
+{"Country":"Philippines","City":"Koronadal","avg_temperature":26.80680858272158}
+{"Country":"Philippines","City":"Laoag","avg_temperature":26.703250616674865}
+{"Country":"Philippines","City":"Lapu Lapu","avg_temperature":27.137616648992527}
+{"Country":"Burma","City":"Lashio","avg_temperature":23.5961029082774}
+{"Country":"Philippines","City":"Legaspi","avg_temperature":26.7335210171251}
+{"Country":"Philippines","City":"Lipa","avg_temperature":26.400379865075287}
+{"Country":"Djibouti","City":"Jibuti","avg_temperature":29.152790108564506}
+{"Country":"Malaysia","City":"Ipoh","avg_temperature":26.809895711500957}
+{"Country":"Malaysia","City":"Johor Bahru","avg_temperature":26.523102826510677}
+{"Country":"Malaysia","City":"Klang","avg_temperature":26.566326510721225}
+{"Country":"Malaysia","City":"Kluang","avg_temperature":26.11456822612089}
+{"Country":"Malaysia","City":"Kota Bahru","avg_temperature":25.30749561403508}
+{"Country":"Malaysia","City":"Kota Kinabalu","avg_temperature":24.95835532467536}
+{"Country":"Malaysia","City":"Kuala Lumpur","avg_temperature":26.566326510721225}
+{"Country":"Malaysia","City":"Kuala Terengganu","avg_temperature":26.327743664717346}
+{"Country":"Malaysia","City":"Kuantan","avg_temperature":26.290350877192967}
+{"Country":"Malaysia","City":"Kuching","avg_temperature":25.928041179461076}
+{"Country":"Malaysia","City":"Kulim","avg_temperature":27.212006301502615}
+{"Country":"Malaysia","City":"Lahad Datu","avg_temperature":26.42495940959407}
+{"Country":"Turkey","City":"Erzincan","avg_temperature":9.047783351913784}
+{"Country":"Turkey","City":"Erzurum","avg_temperature":5.639127576818365}
+{"Country":"Turkey","City":"Esenyurt","avg_temperature":13.319012318382846}
+{"Country":"Turkey","City":"Eskisehir","avg_temperature":11.131511367275056}
+{"Country":"Turkey","City":"Gaziantep","avg_temperature":13.692555112400274}
+{"Country":"Turkey","City":"Gebze","avg_temperature":13.50740903348075}
+{"Country":"Turkey","City":"Inegol","avg_temperature":11.504880611270295}
+{"Country":"Turkey","City":"Iskenderun","avg_temperature":18.708699324324375}
+{"Country":"Turkey","City":"Isparta","avg_temperature":11.881128303198892}
+{"Country":"Turkey","City":"Istanbul","avg_temperature":13.50740903348075}
+{"Country":"Turkey","City":"Izmir","avg_temperature":17.278064578005115}
+{"Country":"Turkey","City":"Izmit","avg_temperature":13.50740903348075}
+{"Country":"Turkey","City":"Kütahya","avg_temperature":11.504880611270295}
+{"Country":"Turkey","City":"Kahramanmaras","avg_temperature":13.692555112400274}
+{"Country":"Turkey","City":"Karaman","avg_temperature":10.413553911205073}
+{"Country":"Turkey","City":"Kayseri","avg_temperature":8.893975142045445}
+{"Country":"Turkey","City":"Konya","avg_temperature":10.413553911205073}
+{"Country":"Malawi","City":"Lilongwe","avg_temperature":20.002832338902156}
+{"Country":"Iraq","City":"Irbil","avg_temperature":19.01354684275691}
+{"Country":"Iraq","City":"Kirkuk","avg_temperature":19.01354684275691}
+{"Country":"Germany","City":"Erfurt","avg_temperature":7.569613708149066}
+{"Country":"Germany","City":"Erlangen","avg_temperature":8.669550536955144}
+{"Country":"Germany","City":"Essen","avg_temperature":8.8251727732154}
+{"Country":"Germany","City":"Fürth","avg_temperature":8.669550536955144}
+{"Country":"Germany","City":"Frankfurt","avg_temperature":8.15924352495262}
+{"Country":"Germany","City":"Freiburg","avg_temperature":6.8390183196462555}
+{"Country":"Germany","City":"Göttingen","avg_temperature":8.44905464308277}
+{"Country":"Germany","City":"Gelsenkirchen","avg_temperature":8.985125078964007}
+{"Country":"Germany","City":"Gera","avg_temperature":7.569613708149066}
+{"Country":"Germany","City":"Hagen","avg_temperature":8.985125078964007}
+{"Country":"Germany","City":"Halle","avg_temperature":7.569613708149066}
+{"Country":"Germany","City":"Hamburg","avg_temperature":8.327234365129488}
+{"Country":"Germany","City":"Hamm","avg_temperature":8.985125078964007}
+{"Country":"Germany","City":"Hanover","avg_temperature":8.44905464308277}
+{"Country":"Germany","City":"Heidelberg","avg_temperature":8.669550536955144}
+{"Country":"Germany","City":"Heilbronn","avg_temperature":8.669550536955144}
+{"Country":"Germany","City":"Herne","avg_temperature":8.985125078964007}
+{"Country":"Germany","City":"Hildesheim","avg_temperature":8.44905464308277}
+{"Country":"Germany","City":"Ingolstadt","avg_temperature":7.746919772583695}
+{"Country":"Germany","City":"Karlsruhe","avg_temperature":9.084157927984826}
+{"Country":"Germany","City":"Kassel","avg_temperature":8.15924352495262}
+{"Country":"Germany","City":"Kiel","avg_temperature":8.327234365129488}
+{"Country":"Germany","City":"Koblenz","avg_temperature":8.8251727732154}
+{"Country":"Germany","City":"Krefeld","avg_temperature":8.8251727732154}
+{"Country":"Germany","City":"Lübeck","avg_temperature":8.327234365129488}
+{"Country":"Germany","City":"Leipzig","avg_temperature":7.569613708149066}
+{"Country":"Germany","City":"Leverkusen","avg_temperature":8.8251727732154}
+{"Country":"Afghanistan","City":"Gardez","avg_temperature":17.27424021266311}
+{"Country":"Afghanistan","City":"Gazni","avg_temperature":10.31199610705596}
+{"Country":"Afghanistan","City":"Herat","avg_temperature":14.213003809523828}
+{"Country":"Afghanistan","City":"Jalalabad","avg_temperature":14.342918906176331}
+{"Country":"Afghanistan","City":"Kabul","avg_temperature":14.342918906176331}
+{"Country":"Jordan","City":"Irbid","avg_temperature":18.360980886539238}
+{"Country":"Rwanda","City":"Kigali","avg_temperature":19.077631823461093}
+{"Country":"Sudan","City":"Juba","avg_temperature":25.66417844727692}
+{"Country":"Sudan","City":"Kassala","avg_temperature":28.938775931232133}
+{"Country":"Sudan","City":"Khartoum","avg_temperature":29.081291289592794}
+{"Country":"Sudan","City":"Kusti","avg_temperature":28.598225729600962}
+{"Country":"France","City":"Grenoble","avg_temperature":8.59641566645612}
+{"Country":"France","City":"Le Havre","avg_temperature":10.18834333543904}
+{"Country":"France","City":"Le Mans","avg_temperature":10.836350915982326}
+{"Country":"France","City":"Lille","avg_temperature":9.876367656348693}
+{"Country":"France","City":"Limoges","avg_temperature":10.560702779532544}
+{"Country":"Greece","City":"Iráklion","avg_temperature":18.725507301808072}
+{"Country":"Greece","City":"Kallithéa","avg_temperature":17.419485933503847}
+{"Country":"Greece","City":"Lárisa","avg_temperature":15.44661528742894}
+{"Country":"Sri Lanka","City":"Jaffna","avg_temperature":27.602999202551846}
+{"Country":"Sri Lanka","City":"Kalmunai","avg_temperature":27.530750000000058}
+{"Country":"Sri Lanka","City":"Kandy","avg_temperature":25.929521132376422}
+{"Country":"Sri Lanka","City":"Kotte","avg_temperature":25.929521132376422}
+{"Country":"Taiwan","City":"Fengshan","avg_temperature":22.973853623188432}
+{"Country":"Taiwan","City":"Hsichih","avg_temperature":22.212440849831008}
+{"Country":"Taiwan","City":"Hsinchu","avg_temperature":21.124517874396126}
+{"Country":"Taiwan","City":"Hsintien","avg_temperature":22.212440849831008}
+{"Country":"Taiwan","City":"Kaohsiung","avg_temperature":22.973853623188432}
+{"Country":"Taiwan","City":"Keelung","avg_temperature":22.212440849831008}
+{"Country":"Togo","City":"Kpalimé","avg_temperature":26.431477027793523}
+{"Country":"Slovakia","City":"Kosice","avg_temperature":7.478025584333536}
+{"Country":"Argentina","City":"Formosa","avg_temperature":21.509100667938963}
+{"Country":"Argentina","City":"Jujuy","avg_temperature":13.406867894736855}
+{"Country":"Argentina","City":"La Plata","avg_temperature":16.62652736842106}
+{"Country":"Argentina","City":"La Rioja","avg_temperature":19.25139947368419}
+{"Country":"Argentina","City":"Lambaré","avg_temperature":22.66188645038166}
+{"Country":"Belgium","City":"Gent","avg_temperature":9.876367656348693}
+{"Country":"Angola","City":"Huambo","avg_temperature":19.81531481481483}
+{"Country":"Angola","City":"Kuito","avg_temperature":19.241916666666633}
+{"Country":"Belgium","City":"Liège","avg_temperature":8.8251727732154}
+{"Country":"Angola","City":"Lobito","avg_temperature":23.184420138888893}
+{"Country":"Ecuador","City":"Guayaquil","avg_temperature":21.268912621359206}
+{"Country":"Ecuador","City":"Ibarra","avg_temperature":17.056301237224325}
+{"Country":"Ecuador","City":"Loja","avg_temperature":20.164394822006468}
+{"Country":"Albania","City":"Elbasan","avg_temperature":15.525828490208465}
+{"Country":"Madagascar","City":"Fianarantsoa","avg_temperature":21.08730623145404}
+{"Country":"Finland","City":"Espoo","avg_temperature":4.28190145293747}
+{"Country":"Finland","City":"Helsinki","avg_temperature":4.28190145293747}
+{"Country":"Ghana","City":"Kumasi","avg_temperature":26.64468718238285}
+{"Country":"Nicaragua","City":"León","avg_temperature":27.34302164066425}
+{"Country":"Sierra Leone","City":"Freetown","avg_temperature":26.58265323435843}
+{"Country":"Peru","City":"Huánuco","avg_temperature":9.748132720105106}
+{"Country":"Peru","City":"Huancayo","avg_temperature":7.359076822916674}
+{"Country":"Peru","City":"Ica","avg_temperature":10.513117573483433}
+{"Country":"Peru","City":"Iquitos","avg_temperature":25.66309136109388}
+{"Country":"Peru","City":"Juliaca","avg_temperature":4.848804180418034}
+{"Country":"Benin","City":"Kandi","avg_temperature":27.01994261363636}
+{"Country":"Sierra Leone","City":"Koidu","avg_temperature":24.692326388888933}
+{"Country":"Peru","City":"Lima","avg_temperature":16.769119658119664}
+{"Country":"Chad","City":"Moundou","avg_temperature":26.932531988472604}
+{"Country":"Paraguay","City":"Luque","avg_temperature":22.814546278625983}
+{"Country":"Russia","City":"Lyubertsy","avg_temperature":3.999710675931771}
+{"Country":"Russia","City":"Magnitogorsk","avg_temperature":0.48229965021375787}
+{"Country":"Russia","City":"Makhachkala","avg_temperature":10.496742512641003}
+{"Country":"Russia","City":"Maykop","avg_temperature":9.67522367134011}
+{"Country":"Russia","City":"Mezhdurechensk","avg_temperature":-1.4356383254208036}
+{"Country":"Russia","City":"Miass","avg_temperature":1.3251916051301975}
+{"Country":"Russia","City":"Moscow","avg_temperature":3.999710675931771}
+{"Country":"Russia","City":"Murmansk","avg_temperature":-1.7339109286165482}
+{"Country":"Russia","City":"Murom","avg_temperature":3.842590334807331}
+{"Country":"Russia","City":"Mytishchi","avg_temperature":3.999710675931771}
+{"Country":"Russia","City":"Nakhodka","avg_temperature":5.6609055343511665}
+{"Country":"Russia","City":"Nalchik","avg_temperature":5.99188349514565}
+{"Country":"Russia","City":"Nazran","avg_temperature":9.9692587883321}
+{"Country":"Russia","City":"Neftekamsk","avg_temperature":2.156210828025478}
+{"Country":"Russia","City":"Nefteyugansk","avg_temperature":-3.5382811078958243}
+{"Country":"Russia","City":"Nevinnomyssk","avg_temperature":7.460634954193121}
+{"Country":"Russia","City":"Nizhnekamsk","avg_temperature":2.7900932527052804}
+{"Country":"Russia","City":"Nizhnevartovsk","avg_temperature":-2.337914501257337}
+{"Country":"Russia","City":"Nizhniy Novgorod","avg_temperature":3.3827346809854686}
+{"Country":"Russia","City":"Nizhniy Tagil","avg_temperature":1.081179945588807}
+{"Country":"Russia","City":"Noginsk","avg_temperature":4.148560328490213}
+{"Country":"Russia","City":"Norilsk","avg_temperature":-11.85474967630557}
+{"Country":"Russia","City":"Novocheboksarsk","avg_temperature":3.34514172730149}
+{"Country":"Russia","City":"Novocherkassk","avg_temperature":8.908760986405287}
+{"Country":"Russia","City":"Novokuznetsk","avg_temperature":0.913679758308156}
+{"Country":"Russia","City":"Novomoskovsk","avg_temperature":4.305832596336082}
+{"Country":"Russia","City":"Novorossiysk","avg_temperature":13.015264162953532}
+{"Country":"Russia","City":"Novosibirsk","avg_temperature":-0.1020202848511011}
+{"Country":"Russia","City":"Novotroitsk","avg_temperature":3.0729692064745353}
+{"Country":"Russia","City":"Obninsk","avg_temperature":3.999710675931771}
+{"Country":"Russia","City":"Odintsovo","avg_temperature":3.999710675931771}
+{"Country":"Russia","City":"Oktyabrskiy","avg_temperature":2.6708100255427825}
+{"Country":"Russia","City":"Omsk","avg_temperature":0.11266320166320185}
+{"Country":"Russia","City":"Orël","avg_temperature":4.954656664560955}
+{"Country":"Russia","City":"Orekhovo Zuevo","avg_temperature":4.148560328490213}
+{"Country":"Russia","City":"Orsk","avg_temperature":3.0729692064745353}
+{"Country":"Russia","City":"Penza","avg_temperature":3.735999367288833}
+{"Country":"Russia","City":"Perm","avg_temperature":1.0170620623806494}
+{"Country":"Russia","City":"Pervouralsk","avg_temperature":1.081179945588807}
+{"Country":"Russia","City":"Petropavlovsk Kamchatskiy","avg_temperature":-0.3222831632653067}
+{"Country":"Russia","City":"Petrozavodsk","avg_temperature":1.5879118761844597}
+{"Country":"Russia","City":"Podolsk","avg_temperature":3.999710675931771}
+{"Country":"Russia","City":"Prokopyevsk","avg_temperature":0.913679758308156}
+{"Country":"Russia","City":"Pskov","avg_temperature":4.686754895767528}
+{"Country":"Russia","City":"Pyatigorsk","avg_temperature":7.460634954193121}
+{"Country":"Russia","City":"Rostov Na Donu","avg_temperature":8.908760986405287}
+{"Country":"Russia","City":"Rubtsovsk","avg_temperature":1.649775140267587}
+{"Country":"Russia","City":"Ryazan","avg_temperature":4.305832596336082}
+{"Country":"Russia","City":"Rybinsk","avg_temperature":2.54920593809223}
+{"Country":"Senegal","City":"Louga","avg_temperature":27.410561965811958}
+{"Country":"Senegal","City":"Mbour","avg_temperature":25.184094017094004}
+{"Country":"Sweden","City":"Malmö","avg_temperature":7.495680669614674}
+{"Country":"Philippines","City":"Lucena","avg_temperature":26.400379865075287}
+{"Country":"Philippines","City":"Mabalacat","avg_temperature":26.448334487877297}
+{"Country":"Philippines","City":"Makati","avg_temperature":26.448334487877297}
+{"Country":"Philippines","City":"Malolos","avg_temperature":26.448334487877297}
+{"Country":"Burma","City":"Mandalay","avg_temperature":26.597740872662502}
+{"Country":"Philippines","City":"Mandaue","avg_temperature":27.137616648992527}
+{"Country":"Philippines","City":"Manila","avg_temperature":26.448334487877297}
+{"Country":"Philippines","City":"Marawi","avg_temperature":26.362624505928878}
+{"Country":"Burma","City":"Mawlamyine","avg_temperature":26.55286920332942}
+{"Country":"Burma","City":"Maymyo","avg_temperature":26.597740872662502}
+{"Country":"Burma","City":"Meiktila","avg_temperature":26.83772849782004}
+{"Country":"Burma","City":"Mergui","avg_temperature":26.378373998219026}
+{"Country":"Philippines","City":"Meycauayan","avg_temperature":26.448334487877297}
+{"Country":"Philippines","City":"Montalban","avg_temperature":26.448334487877297}
+{"Country":"Burma","City":"Monywa","avg_temperature":24.71246648155493}
+{"Country":"Burma","City":"Myingyan","avg_temperature":26.597740872662502}
+{"Country":"Philippines","City":"Naga","avg_temperature":26.7335210171251}
+{"Country":"Philippines","City":"Olongapo","avg_temperature":26.448334487877297}
+{"Country":"Philippines","City":"Pagadian","avg_temperature":26.362624505928878}
+{"Country":"Burma","City":"Pakokku","avg_temperature":24.71246648155493}
+{"Country":"Burma","City":"Pathein","avg_temperature":26.735192733017303}
+{"Country":"Philippines","City":"Puerto Princesa","avg_temperature":27.10602695697255}
+{"Country":"Burma","City":"Pyay","avg_temperature":25.84441666666668}
+{"Country":"Burma","City":"Rangoon","avg_temperature":26.735192733017303}
+{"Country":"Philippines","City":"Roxas","avg_temperature":27.557790562036068}
+{"Country":"Malaysia","City":"Melaka","avg_temperature":26.566326510721225}
+{"Country":"Malaysia","City":"Miri","avg_temperature":26.366963922764295}
+{"Country":"Malaysia","City":"Pasir Gudang","avg_temperature":26.523102826510677}
+{"Country":"Malaysia","City":"Petaling Jaya","avg_temperature":26.566326510721225}
+{"Country":"Malaysia","City":"Rawang","avg_temperature":24.968000487329405}
+{"Country":"Turkey","City":"Malatya","avg_temperature":15.782452371462703}
+{"Country":"Turkey","City":"Manisa","avg_temperature":15.476307594936692}
+{"Country":"Turkey","City":"Mersin","avg_temperature":17.557616612259697}
+{"Country":"Turkey","City":"Nazilli","avg_temperature":15.045692923471007}
+{"Country":"Turkey","City":"Ordu","avg_temperature":11.931302673796772}
+{"Country":"Turkey","City":"Osmaniye","avg_temperature":13.692555112400274}
+{"Country":"Germany","City":"Ludwigshafen","avg_temperature":9.084157927984826}
+{"Country":"Germany","City":"Mönchengladbach","avg_temperature":8.8251727732154}
+{"Country":"Germany","City":"Mülheim","avg_temperature":8.8251727732154}
+{"Country":"Germany","City":"Münster","avg_temperature":8.985125078964007}
+{"Country":"Germany","City":"Magdeburg","avg_temperature":8.44905464308277}
+{"Country":"Germany","City":"Mainz","avg_temperature":8.15924352495262}
+{"Country":"Germany","City":"Mannheim","avg_temperature":9.084157927984826}
+{"Country":"Germany","City":"Moers","avg_temperature":8.8251727732154}
+{"Country":"Germany","City":"Munich","avg_temperature":4.642939039797854}
+{"Country":"Germany","City":"Neuss","avg_temperature":8.8251727732154}
+{"Country":"Germany","City":"Nuremberg","avg_temperature":7.746919772583695}
+{"Country":"Germany","City":"Oberhausen","avg_temperature":8.8251727732154}
+{"Country":"Germany","City":"Offenbach","avg_temperature":8.15924352495262}
+{"Country":"Germany","City":"Oldenburg","avg_temperature":8.985125078964007}
+{"Country":"Germany","City":"Osnabrück","avg_temperature":8.985125078964007}
+{"Country":"Germany","City":"Paderborn","avg_temperature":8.985125078964007}
+{"Country":"Germany","City":"Pforzheim","avg_temperature":8.669550536955144}
+{"Country":"Germany","City":"Potsdam","avg_temperature":8.916233733417545}
+{"Country":"Germany","City":"Ratisbon","avg_temperature":7.746919772583695}
+{"Country":"Germany","City":"Recklinghausen","avg_temperature":8.985125078964007}
+{"Country":"Germany","City":"Remscheid","avg_temperature":8.8251727732154}
+{"Country":"Germany","City":"Reutlingen","avg_temperature":8.669550536955144}
+{"Country":"Germany","City":"Rostock","avg_temperature":8.260517372078333}
+{"Country":"Germany","City":"Saarbrücken","avg_temperature":9.084157927984826}
+{"Country":"Cambodia","City":"Phnum Pénh","avg_temperature":26.918136297728335}
+{"Country":"Afghanistan","City":"Qandahar","avg_temperature":18.77969660678642}
+{"Country":"Afghanistan","City":"Qunduz","avg_temperature":10.790278244631194}
+{"Country":"Sudan","City":"Malakal","avg_temperature":27.300080626450125}
+{"Country":"Sudan","City":"Rabak","avg_temperature":28.598225729600962}
+{"Country":"France","City":"Lyon","avg_temperature":8.59641566645612}
+{"Country":"France","City":"Marseille","avg_temperature":15.321478837650048}
+{"Country":"France","City":"Metz","avg_temperature":9.084157927984826}
+{"Country":"France","City":"Montpellier","avg_temperature":11.36542482627922}
+{"Country":"France","City":"Mulhouse","avg_temperature":6.8390183196462555}
+{"Country":"France","City":"Nîmes","avg_temperature":11.36542482627922}
+{"Country":"France","City":"Nancy","avg_temperature":9.084157927984826}
+{"Country":"France","City":"Nantes","avg_temperature":11.238212886923536}
+{"Country":"France","City":"Nice","avg_temperature":9.02470151610866}
+{"Country":"France","City":"Orléans","avg_temperature":10.836350915982326}
+{"Country":"France","City":"Paris","avg_temperature":10.402644346178146}
+{"Country":"France","City":"Perpignan","avg_temperature":11.201553063802905}
+{"Country":"France","City":"Reims","avg_temperature":9.614359444093484}
+{"Country":"France","City":"Rennes","avg_temperature":11.238212886923536}
+{"Country":"France","City":"Rouen","avg_temperature":10.18834333543904}
+{"Country":"Greece","City":"Pátrai","avg_temperature":14.599418987341764}
+{"Country":"Greece","City":"Peristérion","avg_temperature":17.419485933503847}
+{"Country":"Sri Lanka","City":"Moratuwa","avg_temperature":25.929521132376422}
+{"Country":"Sri Lanka","City":"Negombo","avg_temperature":25.929521132376422}
+{"Country":"Taiwan","City":"Luchou","avg_temperature":21.124517874396126}
+{"Country":"Taiwan","City":"Nantou","avg_temperature":21.449921739130417}
+{"Country":"Taiwan","City":"Panchiao","avg_temperature":22.212440849831008}
+{"Country":"Taiwan","City":"Pate","avg_temperature":21.124517874396126}
+{"Country":"Taiwan","City":"Pingchen","avg_temperature":21.124517874396126}
+{"Country":"Taiwan","City":"Pingtung","avg_temperature":22.973853623188432}
+{"Country":"Algeria","City":"Médéa","avg_temperature":16.904253196931013}
+{"Country":"Equatorial Guinea","City":"Malabo","avg_temperature":25.49346397694525}
+{"Country":"Argentina","City":"Mar Del Plata","avg_temperature":15.11515210526316}
+{"Country":"Argentina","City":"Mendoza","avg_temperature":17.198697894736828}
+{"Country":"Argentina","City":"Mercedes","avg_temperature":17.681402631578973}
+{"Country":"Argentina","City":"Neuquen","avg_temperature":12.310644210526295}
+{"Country":"Argentina","City":"Parana","avg_temperature":18.696306315789467}
+{"Country":"Argentina","City":"Posadas","avg_temperature":20.295259064885528}
+{"Country":"Argentina","City":"Resistencia","avg_temperature":20.69721230916032}
+{"Country":"Argentina","City":"Rio Cuarto","avg_temperature":15.927253157894706}
+{"Country":"Argentina","City":"Rosario","avg_temperature":17.21102421052631}
+{"Country":"Angola","City":"Luanda","avg_temperature":23.693045533141177}
+{"Country":"Angola","City":"Lubango","avg_temperature":21.430774492753613}
+{"Country":"Belgium","City":"Namur","avg_temperature":9.876367656348693}
+{"Country":"Ecuador","City":"Machala","avg_temperature":20.164394822006468}
+{"Country":"Ecuador","City":"Manta","avg_temperature":24.245235404896405}
+{"Country":"Ecuador","City":"Milagro","avg_temperature":21.268912621359206}
+{"Country":"Ecuador","City":"Portoviejo","avg_temperature":24.245235404896405}
+{"Country":"Ecuador","City":"Quevedo","avg_temperature":21.519425201738073}
+{"Country":"Ecuador","City":"Quito","avg_temperature":16.912374924288315}
+{"Country":"Ecuador","City":"Riobamba","avg_temperature":21.354262613195388}
+{"Country":"Lesotho","City":"Maseru","avg_temperature":14.040680192205034}
+{"Country":"Madagascar","City":"Mahajanga","avg_temperature":26.463596142938243}
+{"Country":"Finland","City":"Oulu","avg_temperature":1.4866373973468106}
+{"Country":"Nicaragua","City":"Managua","avg_temperature":26.375943276283706}
+{"Country":"Nicaragua","City":"Masaya","avg_temperature":26.375943276283706}
+{"Country":"Ghana","City":"Obuasi","avg_temperature":25.93373913043478}
+{"Country":"Benin","City":"Parakou","avg_temperature":26.4507068181818}
+{"Country":"Peru","City":"Piura","avg_temperature":23.042572815533948}
+{"Country":"Peru","City":"Pucallpa","avg_temperature":26.033883344134797}
+{"Country":"Peru","City":"Puno","avg_temperature":4.848804180418034}
+{"Country":"Chad","City":"Sarh","avg_temperature":27.447126801152763}
+{"Country":"Russia","City":"Saint Petersburg","avg_temperature":3.9180445356917275}
+{"Country":"Russia","City":"Salavat","avg_temperature":2.147163642960817}
+{"Country":"Russia","City":"Samara","avg_temperature":3.3325101845958027}
+{"Country":"Paraguay","City":"San Lorenzo","avg_temperature":22.814546278625983}
+{"Country":"Russia","City":"Saransk","avg_temperature":3.735999367288833}
+{"Country":"Russia","City":"Sarapul","avg_temperature":1.492210375556969}
+{"Country":"Russia","City":"Saratov","avg_temperature":4.395683004455763}
+{"Country":"Russia","City":"Sergiyev Posad","avg_temperature":3.5237258370183127}
+{"Country":"Russia","City":"Serpukhov","avg_temperature":3.999710675931771}
+{"Country":"Russia","City":"Severodvinsk","avg_temperature":0.32794030322173096}
+{"Country":"Russia","City":"Seversk","avg_temperature":-0.3891324989210191}
+{"Country":"Russia","City":"Shakhty","avg_temperature":8.908760986405287}
+{"Country":"Russia","City":"Smolensk","avg_temperature":4.600215097915344}
+{"Country":"Russia","City":"Sochi","avg_temperature":9.67522367134011}
+{"Country":"Russia","City":"Solikamsk","avg_temperature":-1.5525044699872246}
+{"Country":"Russia","City":"Staryy Oskol","avg_temperature":6.088637081490845}
+{"Country":"Russia","City":"Stavropol","avg_temperature":7.460634954193121}
+{"Country":"Russia","City":"Sterlitamak","avg_temperature":2.147163642960817}
+{"Country":"Russia","City":"Surgut","avg_temperature":-3.5382811078958243}
+{"Country":"Russia","City":"Syktyvkar","avg_temperature":-0.006267214150347291}
+{"Country":"Russia","City":"Syzran","avg_temperature":3.343506168933874}
+{"Country":"Russia","City":"Taganrog","avg_temperature":8.908760986405287}
+{"Country":"Russia","City":"Tambov","avg_temperature":4.804459886291845}
+{"Country":"Russia","City":"Tolyatti","avg_temperature":3.3325101845958027}
+{"Country":"Russia","City":"Tomsk","avg_temperature":-0.3891324989210191}
+{"Country":"Russia","City":"Tula","avg_temperature":4.305852495262154}
+{"Country":"Russia","City":"Tver","avg_temperature":3.5237258370183127}
+{"Country":"Russia","City":"Tyumen","avg_temperature":0.6513670938404303}
+{"Country":"Russia","City":"Ufa","avg_temperature":1.810870161014046}
+{"Country":"Russia","City":"Ukhta","avg_temperature":-1.6462818728250586}
+{"Country":"Russia","City":"Ulan Ude","avg_temperature":-3.179915407854988}
+{"Country":"Russia","City":"Ulyanovsk","avg_temperature":3.343506168933874}
+{"Country":"Russia","City":"Ussuriysk","avg_temperature":3.21048937132519}
+{"Country":"Russia","City":"Ust Ilimsk","avg_temperature":-3.9967997410444496}
+{"Country":"Russia","City":"Velikie Luki","avg_temperature":4.169627289955789}
+{"Country":"Russia","City":"Velikiy Novgorod","avg_temperature":3.974589703095383}
+{"Country":"Russia","City":"Vladikavkaz","avg_temperature":5.99188349514565}
+{"Country":"Russia","City":"Vladimir","avg_temperature":4.148560328490213}
+{"Country":"Russia","City":"Vladivostok","avg_temperature":5.531794906775801}
+{"Country":"Russia","City":"Volgodonsk","avg_temperature":8.74257861436253}
+{"Country":"Russia","City":"Volgograd","avg_temperature":7.360381922342471}
+{"Country":"Russia","City":"Vologda","avg_temperature":2.54920593809223}
+{"Country":"Russia","City":"Volzhskiy","avg_temperature":7.360381922342471}
+{"Country":"Russia","City":"Voronezh","avg_temperature":4.998207201516104}
+{"Country":"Russia","City":"Yaroslavl","avg_temperature":3.12503506001264}
+{"Country":"Russia","City":"Yekaterinburg","avg_temperature":1.081179945588807}
+{"Country":"Russia","City":"Yelets","avg_temperature":4.998207201516104}
+{"Country":"Russia","City":"Zelenodolsk","avg_temperature":3.34514172730149}
+{"Country":"Russia","City":"Zelenograd","avg_temperature":3.999710675931771}
+{"Country":"Russia","City":"Zhukovskiy","avg_temperature":3.999710675931771}
+{"Country":"Russia","City":"Zlatoust","avg_temperature":1.3251916051301975}
+{"Country":"Senegal","City":"Saint Louis","avg_temperature":25.004664529914503}
+{"Country":"Senegal","City":"Thiès","avg_temperature":24.6275202991453}
+{"Country":"Senegal","City":"Ziguinchor","avg_temperature":26.006171031533913}
+{"Country":"Sweden","City":"Stockholm","avg_temperature":6.399292482627902}
+{"Country":"Sweden","City":"Uppsala","avg_temperature":4.271149715729615}
+{"Country":"Sweden","City":"Västerås","avg_temperature":4.271149715729615}
+{"Country":"Philippines","City":"San Fernando","avg_temperature":26.448334487877297}
+{"Country":"Philippines","City":"San Mateo","avg_temperature":26.448334487877297}
+{"Country":"Philippines","City":"San Pablo","avg_temperature":26.400379865075287}
+{"Country":"Philippines","City":"San Pedro","avg_temperature":26.400379865075287}
+{"Country":"Philippines","City":"Santa Cruz","avg_temperature":26.400379865075287}
+{"Country":"Philippines","City":"Santa Rosa","avg_temperature":26.400379865075287}
+{"Country":"Philippines","City":"Santiago","avg_temperature":25.76512271152896}
+{"Country":"Philippines","City":"Tacloban","avg_temperature":26.69379798515376}
+{"Country":"Philippines","City":"Tagum","avg_temperature":25.90448233106017}
+{"Country":"Philippines","City":"Talisay","avg_temperature":27.137616648992527}
+{"Country":"Philippines","City":"Tanza","avg_temperature":26.448334487877297}
+{"Country":"Philippines","City":"Tarlac","avg_temperature":26.448334487877297}
+{"Country":"Burma","City":"Taunggyi","avg_temperature":23.423545859305406}
+{"Country":"Philippines","City":"Taytay","avg_temperature":26.448334487877297}
+{"Country":"Burma","City":"Thaton","avg_temperature":26.55286920332942}
+{"Country":"Philippines","City":"Toledo","avg_temperature":27.137616648992527}
+{"Country":"Burma","City":"Toungoo","avg_temperature":26.089269124058646}
+{"Country":"Philippines","City":"Tuguegarao","avg_temperature":26.176266567754688}
+{"Country":"Philippines","City":"Urdaneta","avg_temperature":26.448334487877297}
+{"Country":"Burma","City":"Yenangyaung","avg_temperature":26.83772849782004}
+{"Country":"Philippines","City":"Zamboanga","avg_temperature":26.937595837897014}
+{"Country":"Malaysia","City":"Sandakan","avg_temperature":26.42495940959407}
+{"Country":"Malaysia","City":"Sekudai","avg_temperature":26.523102826510677}
+{"Country":"Malaysia","City":"Seremban","avg_temperature":26.566326510721225}
+{"Country":"Malaysia","City":"Shah Alam","avg_temperature":26.566326510721225}
+{"Country":"Malaysia","City":"Sibu","avg_temperature":25.826665650406532}
+{"Country":"Singapore","City":"Singapore","avg_temperature":26.523102826510677}
+{"Country":"Malaysia","City":"Sungai Petani","avg_temperature":27.212006301502615}
+{"Country":"Malaysia","City":"Taiping","avg_temperature":26.809895711500957}
+{"Country":"Malaysia","City":"Tawau","avg_temperature":26.05844012944984}
+{"Country":"Turkey","City":"Samsun","avg_temperature":12.062078239608805}
+{"Country":"Turkey","City":"Siirt","avg_temperature":12.502253664495127}
+{"Country":"Turkey","City":"Sivas","avg_temperature":8.126282171099923}
+{"Country":"Turkey","City":"Siverek","avg_temperature":15.782452371462703}
+{"Country":"Turkey","City":"Tarsus","avg_temperature":11.220228601997153}
+{"Country":"Turkey","City":"Tekirdag","avg_temperature":13.319012318382846}
+{"Country":"Turkey","City":"Tokat","avg_temperature":12.062078239608805}
+{"Country":"Turkey","City":"Trabzon","avg_temperature":10.508612021857907}
+{"Country":"Turkey","City":"Turgutlu","avg_temperature":15.045692923471007}
+{"Country":"Turkey","City":"Turhal","avg_temperature":12.062078239608805}
+{"Country":"Turkey","City":"Urfa","avg_temperature":15.782452371462703}
+{"Country":"Turkey","City":"Usak","avg_temperature":11.504880611270295}
+{"Country":"Turkey","City":"Van","avg_temperature":12.502253664495127}
+{"Country":"Turkey","City":"Viransehir","avg_temperature":15.24783582089553}
+{"Country":"Turkey","City":"Zonguldak","avg_temperature":10.984850541746331}
+{"Country":"Germany","City":"Salzgitter","avg_temperature":8.44905464308277}
+{"Country":"Germany","City":"Siegen","avg_temperature":8.15924352495262}
+{"Country":"Germany","City":"Solingen","avg_temperature":8.8251727732154}
+{"Country":"Germany","City":"Stuttgart","avg_temperature":8.669550536955144}
+{"Country":"Germany","City":"Trier","avg_temperature":9.084157927984826}
+{"Country":"Germany","City":"Ulm","avg_temperature":8.669550536955144}
+{"Country":"Germany","City":"Würzburg","avg_temperature":8.669550536955144}
+{"Country":"Germany","City":"Wiesbaden","avg_temperature":8.15924352495262}
+{"Country":"Germany","City":"Witten","avg_temperature":8.985125078964007}
+{"Country":"Germany","City":"Wolfsburg","avg_temperature":8.44905464308277}
+{"Country":"Germany","City":"Wuppertal","avg_temperature":8.8251727732154}
+{"Country":"Sudan","City":"Sinnar","avg_temperature":28.19162060750448}
+{"Country":"Sudan","City":"Umm Durman","avg_temperature":29.081291289592794}
+{"Country":"Sudan","City":"Wad Madani","avg_temperature":28.19162060750448}
+{"Country":"Sudan","City":"Waw","avg_temperature":27.05087682428499}
+{"Country":"France","City":"Saint Étienne","avg_temperature":8.80143777637397}
+{"Country":"France","City":"Strasbourg","avg_temperature":9.084157927984826}
+{"Country":"France","City":"Toulon","avg_temperature":15.321478837650048}
+{"Country":"France","City":"Toulouse","avg_temperature":10.48450284270373}
+{"Country":"France","City":"Tours","avg_temperature":10.836350915982326}
+{"Country":"France","City":"Villeurbanne","avg_temperature":8.59641566645612}
+{"Country":"Greece","City":"Thessaloníki","avg_temperature":13.655489892608909}
+{"Country":"Sri Lanka","City":"Trincomalee","avg_temperature":28.165427432216955}
+{"Country":"Taiwan","City":"Sanchung","avg_temperature":21.124517874396126}
+{"Country":"Taiwan","City":"Sanhsia","avg_temperature":21.124517874396126}
+{"Country":"Taiwan","City":"Shulin","avg_temperature":21.124517874396126}
+{"Country":"Taiwan","City":"Taichung","avg_temperature":21.124517874396126}
+{"Country":"Taiwan","City":"Tainan","avg_temperature":22.973853623188432}
+{"Country":"Taiwan","City":"Taipei","avg_temperature":22.212440849831008}
+{"Country":"Taiwan","City":"Taitung","avg_temperature":21.449921739130417}
+{"Country":"Taiwan","City":"Tali","avg_temperature":21.124517874396126}
+{"Country":"Taiwan","City":"Tanshui","avg_temperature":21.124517874396126}
+{"Country":"Taiwan","City":"Taoyüan","avg_temperature":21.124517874396126}
+{"Country":"Taiwan","City":"Touliu","avg_temperature":22.973853623188432}
+{"Country":"Taiwan","City":"Tucheng","avg_temperature":21.124517874396126}
+{"Country":"Taiwan","City":"Yüanlin","avg_temperature":21.124517874396126}
+{"Country":"Taiwan","City":"Yangmei","avg_temperature":21.124517874396126}
+{"Country":"Taiwan","City":"Yungho","avg_temperature":22.212440849831008}
+{"Country":"Taiwan","City":"Yungkang","avg_temperature":21.449921739130417}
+{"Country":"Togo","City":"Sokodé","avg_temperature":26.857237663074297}
+{"Country":"Algeria","City":"Wahran","avg_temperature":17.549897698209683}
+{"Country":"Algeria","City":"Warqla","avg_temperature":22.988095907928326}
+{"Country":"Reunion","City":"Saint Denis","avg_temperature":23.301403091557614}
+{"Country":"Argentina","City":"Salta","avg_temperature":13.406867894736855}
+{"Country":"Argentina","City":"San Carlos De Bariloche","avg_temperature":7.961641578947376}
+{"Country":"Argentina","City":"San Juan","avg_temperature":17.826765789473676}
+{"Country":"Argentina","City":"San Luis","avg_temperature":17.681402631578973}
+{"Country":"Argentina","City":"San Martin","avg_temperature":17.198697894736828}
+{"Country":"Argentina","City":"San Nicolas","avg_temperature":17.21102421052631}
+{"Country":"Argentina","City":"San Rafael","avg_temperature":14.756773157894719}
+{"Country":"Argentina","City":"Santa Fe","avg_temperature":18.696306315789467}
+{"Country":"Argentina","City":"Santiago Del Estero","avg_temperature":19.985221052631605}
+{"Country":"Argentina","City":"Tandil","avg_temperature":14.208021052631565}
+{"Country":"Argentina","City":"Trelew","avg_temperature":13.224744210526307}
+{"Country":"Argentina","City":"Tucuman","avg_temperature":20.13151421052634}
+{"Country":"Ecuador","City":"Santo Domingo","avg_temperature":21.519425201738073}
+{"Country":"Albania","City":"Tirana","avg_temperature":15.525828490208465}
+{"Country":"Madagascar","City":"Toamasina","avg_temperature":21.89964605785596}
+{"Country":"Madagascar","City":"Toliary","avg_temperature":24.147391111111087}
+{"Country":"Finland","City":"Tampere","avg_temperature":3.67583701831965}
+{"Country":"Finland","City":"Turku","avg_temperature":4.831945356917244}
+{"Country":"Ghana","City":"Sekondi","avg_temperature":25.93373913043478}
+{"Country":"Ghana","City":"Takoradi","avg_temperature":25.93373913043478}
+{"Country":"Ghana","City":"Tamale","avg_temperature":27.637992659514367}
+{"Country":"Ghana","City":"Tema","avg_temperature":26.287347826086958}
+{"Country":"Ghana","City":"Teshie","avg_temperature":26.287347826086958}
+{"Country":"Peru","City":"Sullana","avg_temperature":23.042572815533948}
+{"Country":"Peru","City":"Tacna","avg_temperature":19.173233684210505}
+{"Country":"Peru","City":"Talara","avg_temperature":23.038392233009713}
+{"Country":"Peru","City":"Trujillo","avg_temperature":18.0916177062374}
+{"Country":"Peru","City":"Tumbes","avg_temperature":23.038392233009713}
