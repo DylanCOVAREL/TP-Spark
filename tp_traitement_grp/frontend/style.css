@@ -1,0 +1,58 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background-color: #f4f6f9;
+    color: #333;
+  }
+  
+  /* ================= HEADER ================= */
+  header {
+    background-color: #1e293b;
+    color: white;
+    padding: 25px;
+    text-align: center;
+  }
+  
+  header h1 {
+    margin: 0;
+  }
+  
+  header p {
+    margin-top: 8px;
+    opacity: 0.85;
+  }
+  
+  /* ================= SECTIONS ================= */
+  section {
+    background-color: white;
+    margin: 25px auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 1100px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  section h2 {
+    margin-bottom: 15px;
+    color: #1e293b;
+  }
+  
+  /* ================= CHARTS ================= */
+  canvas {
+    width: 100% !important;
+    height: 400px !important;
+  }
+  
+  /* ================= FOOTER ================= */
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    color: #666;
+  }
+  

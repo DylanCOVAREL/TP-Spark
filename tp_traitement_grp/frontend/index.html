@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Climate Analytics Dashboard</title>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- CSS SERVI PAR FASTAPI -->
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<header>
+  <h1>🌍 Climate Analytics Dashboard</h1>
+  <p>Analyse des températures mondiales — Spark • FastAPI • Chart.js</p>
+</header>
+
+<section>
+  <h2>🔥 Top 10 des villes les plus chaudes</h2>
+  <canvas id="topCitiesChart"></canvas>
+</section>
+
+<section>
+  <h2>📈 Évolution annuelle globale des températures</h2>
+  <canvas id="globalTrendChart"></canvas>
+</section>
+
+<section>
+  <h2>🌍 Température moyenne par pays (Top 15)</h2>
+  <canvas id="countryChart"></canvas>
+</section>
+
+<section>
+  <h2>🏙️ Évolution annuelle d’une ville (Drill-down)</h2>
+  <p><strong>Exemple :</strong> Paris, France</p>
+  <canvas id="cityTrendChart"></canvas>
+</section>
+
+<footer>
+  Projet Big Data Distribué — Spark Batch & Streaming — 2026
+</footer>
+
+<!-- JS SERVI PAR FASTAPI -->
+<script src="/static/app.js"></script>
+
+</body>
+</html>

@@ -3,7 +3,12 @@ from pyspark.sql.functions import (
     col,
     to_date,
     year,
-    avg
+    avg,
+    desc,
+    floor,
+    stddev,
+    min,
+    max
 )
 
 # =========================================================
@@ -17,7 +22,7 @@ spark.sparkContext.setLogLevel("WARN")
 print("=== Spark démarré ===")
 
 # =========================================================
-# 2. Chargement CSV
+# 2. Chargement CSV (BRONZE)
 # =========================================================
 df_raw = spark.read \
     .option("header", "true") \
@@ -27,7 +32,7 @@ df_raw = spark.read \
 print("Lignes chargées :", df_raw.count())
 
 # =========================================================
-# 3. Nettoyage des données
+# 3. Nettoyage des données (SILVER)
 # =========================================================
 df_clean = (
     df_raw
@@ -39,19 +44,24 @@ df_clean = (
 # Cache pour performance
 df_clean.cache()
 df_clean.count()
-
 print("Nettoyage terminé")
 
 # =========================================================
-# 4. Repartition stratégique
+# 4. Enrichissement (année → décennie)
 # =========================================================
-df_repart = df_clean.repartition("Country")
+df_enriched = (
+    df_clean
+    .withColumn("decade", floor(col("year") / 10) * 10)
+)
+
+# Repartition stratégique
+df_repart = df_enriched.repartition("Country")
 
 # =========================================================
-# 5. Agrégations climatiques (EXISTANTES)
+# 5. AGRÉGATIONS EXISTANTES
 # =========================================================
 
-# Température moyenne par pays et par année
+# 🔹 Température moyenne par pays et par année
 avg_temp_country_year = (
     df_repart
     .groupBy("Country", "year")
@@ -61,7 +71,7 @@ avg_temp_country_year = (
 avg_temp_country_year.cache()
 avg_temp_country_year.count()
 
-# Température moyenne par ville
+# 🔹 Température moyenne par ville (globale)
 avg_temp_city = (
     df_repart
     .groupBy("Country", "City")
@@ -71,17 +81,17 @@ avg_temp_city = (
 print("Agrégations existantes terminées")
 
 # =========================================================
-# 6. NOUVELLES AGRÉGATIONS
+# 6. NOUVELLES AGRÉGATIONS CLIMATIQUES
 # =========================================================
 
-# 🔹 Top 10 des villes les plus chaudes (toute période)
+# 🔥 1. Top 10 des villes les plus chaudes (historique)
 top_10_hottest_cities = (
     avg_temp_city
-    .orderBy(col("avg_temperature").desc())
+    .orderBy(desc("avg_temperature"))
     .limit(10)
 )
 
-# 🔹 Évolution annuelle globale (toutes villes confondues)
+# 📈 2. Évolution annuelle globale
 global_yearly_trend = (
     df_repart
     .groupBy("year")
@@ -89,23 +99,62 @@ global_yearly_trend = (
     .orderBy("year")
 )
 
+# 🌍 3. Température moyenne par pays (globale)
+avg_temp_by_country = (
+    df_repart
+    .groupBy("Country")
+    .agg(avg("AverageTemperature").alias("avg_temperature"))
+    .orderBy(desc("avg_temperature"))
+)
+
+# 🏙️ 4. Évolution annuelle par ville
+avg_temp_city_year = (
+    df_repart
+    .groupBy("Country", "City", "year")
+    .agg(avg("AverageTemperature").alias("avg_temperature"))
+)
+
+# 📆 5. Température moyenne par décennie
+avg_temp_by_decade = (
+    df_repart
+    .groupBy("decade")
+    .agg(avg("AverageTemperature").alias("avg_temperature"))
+    .orderBy("decade")
+)
+
+# 🌪️ 6. Variabilité climatique (instabilité) par ville
+temp_variability_city = (
+    df_repart
+    .groupBy("Country", "City")
+    .agg(stddev("AverageTemperature").alias("temp_variability"))
+    .orderBy(desc("temp_variability"))
+)
+
+# 🚀 7. Tendance de réchauffement (delta température)
+temp_trend_city = (
+    df_repart
+    .groupBy("Country", "City")
+    .agg(
+        (max("AverageTemperature") - min("AverageTemperature"))
+        .alias("temp_delta")
+    )
+    .orderBy(desc("temp_delta"))
+)
+
 print("Nouvelles agrégations climatiques terminées")
 
 # =========================================================
-# 7. Sauvegarde des résultats
+# 7. Sauvegarde des résultats (CURATED)
 # =========================================================
 
-# Ancien résultat
 avg_temp_country_year.write \
     .mode("overwrite") \
     .parquet("data/curated/avg_temp_country_year")
 
-# Ancien résultat
 avg_temp_city.write \
     .mode("overwrite") \
-    .json("output/avg_temp_city_json")
+    .json("data/curated/avg_temp_city")
 
-# 🔹 NOUVEAUX résultats
 top_10_hottest_cities.write \
     .mode("overwrite") \
     .json("data/curated/top_10_hottest_cities")
@@ -113,6 +162,26 @@ top_10_hottest_cities.write \
 global_yearly_trend.write \
     .mode("overwrite") \
     .parquet("data/curated/global_yearly_trend")
+
+avg_temp_by_country.write \
+    .mode("overwrite") \
+    .parquet("data/curated/avg_temp_by_country")
+
+avg_temp_city_year.write \
+    .mode("overwrite") \
+    .parquet("data/curated/avg_temp_city_year")
+
+avg_temp_by_decade.write \
+    .mode("overwrite") \
+    .parquet("data/curated/avg_temp_by_decade")
+
+temp_variability_city.write \
+    .mode("overwrite") \
+    .parquet("data/curated/temp_variability_city")
+
+temp_trend_city.write \
+    .mode("overwrite") \
+    .parquet("data/curated/temp_trend_city")
 
 print("Résultats sauvegardés")
 
