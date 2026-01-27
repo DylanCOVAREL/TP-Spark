@@ -41,9 +41,8 @@ def run_consumer(mode='file'):
     consumer.run()
 
 
-def run_stream(api_mode=False):
+def run_stream(mode='simulation'):
     """Lance producteur et consommateur en parallèle"""
-    import subprocess
     import threading
     
     print("=" * 70)
@@ -55,10 +54,9 @@ def run_stream(api_mode=False):
     print("\nOu lancer dans ce terminal (Ctrl+C pour arrêter):\n")
     
     # Lancer le producteur dans un thread
-    mode = 'api' if api_mode else 'simulation'
     producer_thread = threading.Thread(
-        target=run_producer, 
-        args=(mode, False, 0),
+        target=WeatherProducer(mode=mode).run, 
+        kwargs={'max_iterations': 0},
         daemon=True
     )
     producer_thread.start()
@@ -69,14 +67,10 @@ def run_stream(api_mode=False):
     run_consumer('file')
 
 
-def read_results(result_type='both'):
-    """Lit les résultats"""
-    from src.utils import read_batch_results, read_streaming_results
-    
-    if result_type in ['batch', 'both']:
-        read_batch_results()
-    if result_type in ['streaming', 'both']:
-        read_streaming_results()
+def read_results():
+    """Lit les résultats unifiés (batch + streaming)"""
+    from src.utils import read_results as _read
+    _read()
 
 
 def main():
@@ -85,13 +79,12 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Exemples:
-  python run.py batch                    # ETL batch sur données historiques
-  python run.py producer                 # Générer des données météo simulées
-  python run.py producer --api           # Générer avec API Open-Meteo réelle
-  python run.py consumer                 # Consommer les données en streaming
-  python run.py consumer --kafka         # Consommer depuis Kafka
-  python run.py read                     # Lire tous les résultats
-  python run.py read batch               # Lire uniquement les résultats batch
+  python run.py batch                       # ETL batch sur données historiques
+  python run.py producer                    # Générer des données météo simulées
+  python run.py producer --mode openweather # Générer avec OpenWeatherMap
+  python run.py consumer                    # Consommer les données en streaming
+  python run.py stream --mode openweather   # Lancer tout le pipeline streaming
+  python run.py read                        # Lire le Parquet unifié (batch + streaming)
         """
     )
     
@@ -102,7 +95,8 @@ Exemples:
     
     # Commande producer
     producer_parser = subparsers.add_parser('producer', help='Lancer le producteur de données')
-    producer_parser.add_argument('--api', action='store_true', help='Utiliser l\'API Open-Meteo')
+    producer_parser.add_argument('--mode', choices=['simulation', 'api', 'windy', 'openweather'], default='simulation',
+                                help='Mode: simulation (données aléatoires), api (Open-Meteo gratuit), windy (API Windy), openweather (OpenWeatherMap)')
     producer_parser.add_argument('--kafka', action='store_true', help='Envoyer vers Kafka')
     producer_parser.add_argument('-n', '--iterations', type=int, default=0, help='Nombre d\'itérations (0=infini)')
     
@@ -112,27 +106,26 @@ Exemples:
     
     # Commande stream
     stream_parser = subparsers.add_parser('stream', help='Lancer producteur + consommateur')
-    stream_parser.add_argument('--api', action='store_true', help='Utiliser l\'API Open-Meteo')
+    stream_parser.add_argument('--mode', choices=['simulation', 'api', 'windy', 'openweather'], default='simulation',
+                              help='Mode du producteur')
     
     # Commande read
-    read_parser = subparsers.add_parser('read', help='Lire les résultats')
-    read_parser.add_argument('type', nargs='?', choices=['batch', 'streaming', 'both'], 
-                            default='both', help='Type de résultats')
+    subparsers.add_parser('read', help='Lire les résultats unifiés (batch + streaming)')
     
     args = parser.parse_args()
     
     if args.command == 'batch':
         run_batch()
     elif args.command == 'producer':
-        mode = 'api' if args.api else 'simulation'
-        run_producer(mode, args.kafka, args.iterations)
+        producer = WeatherProducer(mode=args.mode, kafka_enabled=args.kafka)
+        producer.run(max_iterations=args.iterations)
     elif args.command == 'consumer':
         mode = 'kafka' if args.kafka else 'file'
         run_consumer(mode)
     elif args.command == 'stream':
-        run_stream(args.api)
+        run_stream(args.mode)
     elif args.command == 'read':
-        read_results(args.type)
+        read_results()
     else:
         parser.print_help()
 

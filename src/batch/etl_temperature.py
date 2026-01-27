@@ -6,7 +6,7 @@ Ce module gère le traitement batch des données historiques de température.
 """
 
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, avg, year, to_date, round, desc, asc
+from pyspark.sql.functions import col, avg, year, to_date, round, lit
 import time
 import os
 import sys
@@ -88,6 +88,7 @@ class TemperatureETL:
         print("  3️⃣ Calcul de la température moyenne par ville et année...")
         self.df_result = df_clean.groupBy("City", "Country", "year") \
             .agg(round(avg("AverageTemperature"), 2).alias("temperature_moyenne")) \
+            .withColumn("source", lit("batch")) \
             .orderBy("Country", "City", "year")
         
         print(f"\n✅ Transformation terminée en {time.time() - start:.1f}s")
@@ -97,10 +98,9 @@ class TemperatureETL:
         
         return self
         
-    def load(self, output_path=None, formats=None):
-        """LOAD - Sauvegarde les résultats dans différents formats"""
-        output_path = output_path or PATHS['data_output']
-        formats = formats or ['parquet', 'csv', 'json']
+    def load(self, output_path=None):
+        """LOAD - Sauvegarde les résultats dans le parquet unifié"""
+        output_path = output_path or PATHS['results']
         
         print("\n" + "=" * 70)
         print("PHASE 3 : LOAD - Sauvegarde des résultats")
@@ -109,30 +109,24 @@ class TemperatureETL:
         os.makedirs(output_path, exist_ok=True)
         start = time.time()
         
-        for fmt in formats:
-            path = f"{output_path}/temperature_ville_annee.{fmt}"
-            print(f"\n  💾 Sauvegarde en {fmt.upper()}...")
-            
-            if fmt == 'parquet':
-                self.df_result.write.mode("overwrite").parquet(path)
-            elif fmt == 'csv':
-                self.df_result.coalesce(1).write.mode("overwrite").option("header", True).csv(path)
-            elif fmt == 'json':
-                self.df_result.coalesce(1).write.mode("overwrite").json(path)
-                
-            print(f"      ✅ {path}")
+        parquet_path = f"{output_path}/temperatures.parquet"
+        print(f"\n  💾 Sauvegarde en Parquet unifié...")
         
+        # Écrire en mode append pour fusionner avec streaming
+        self.df_result.write.mode("append").parquet(parquet_path)
+        
+        print(f"      ✅ {parquet_path}")
         print(f"\n✅ Sauvegarde terminée en {time.time() - start:.1f}s")
         return self
         
-    def run(self, output_path=None, formats=None):
+    def run(self, output_path=None):
         """Exécute le pipeline ETL complet"""
         print("=" * 70)
         print("ETL SPARK - TEMPÉRATURE MOYENNE PAR VILLE ET ANNÉE")
         print("=" * 70)
         
         self._create_spark_session()
-        self.extract().transform().load(output_path, formats)
+        self.extract().transform().load(output_path)
         
         print("\n" + "=" * 70)
         print("✅ PIPELINE ETL TERMINÉ AVEC SUCCÈS")

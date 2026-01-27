@@ -8,9 +8,8 @@ Configuration centralisée du projet
 
 PATHS = {
     'data_input': 'data/input',
-    'data_output': 'data/output',
+    'results': 'data/results',              # Parquet unifié (batch + streaming)
     'streaming_input': 'data/streaming_input',
-    'streaming_output': 'data/streaming_output',
     'checkpoints': 'data/checkpoints',
     'csv_source': 'GlobalLandTemperaturesByCity.csv'
 }
@@ -41,8 +40,8 @@ KAFKA_CONFIG = {
 # ============================================================================
 
 API_KEYS = {
-    'windy': 'VOTRE_CLE_API_WINDY',  # https://api.windy.com/
-    'openweather': '',                # https://openweathermap.org/api
+    'windy': '7LMJe7Je28zkEUvOHSn7jqrHV5kyMUxC',  # https://api.windy.com/
+    'openweather': 'fafee942c1fa039aa0055625fd480ea9',  # https://openweathermap.org/api
     'weatherapi': '',                 # https://www.weatherapi.com/
     'openmeteo': 'gratuit',           # Pas besoin de clé
     'visualcrossing': ''              # https://www.visualcrossing.com/

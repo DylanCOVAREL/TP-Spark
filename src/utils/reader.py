@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Utilitaire pour lire et analyser les résultats Parquet
+Utilitaire pour lire et analyser le Parquet unifié (batch + streaming)
 """
 
 from pyspark.sql import SparkSession
@@ -13,7 +13,7 @@ from src.config import PATHS, SPARK_CONFIG
 
 
 class ParquetReader:
-    """Lecteur et analyseur de fichiers Parquet"""
+    """Lecteur et analyseur du fichier Parquet unifié"""
     
     def __init__(self):
         self.spark = None
@@ -27,10 +27,21 @@ class ParquetReader:
             .getOrCreate()
         self.spark.sparkContext.setLogLevel("WARN")
         
-    def load(self, path):
-        """Charge un fichier ou dossier Parquet"""
+    def load(self):
+        """Charge le parquet unifié"""
         if not self.spark:
             self._create_spark_session()
+        
+        path = f"{PATHS['results']}/temperatures.parquet"
+        
+        # Fallback vers ancien chemin si nécessaire
+        if not os.path.exists(path):
+            path = "resultats/temperature_ville_annee.parquet"
+            
+        if not os.path.exists(path):
+            print("❌ Aucun résultat trouvé")
+            print(f"   Exécutez d'abord: python run.py batch")
+            return None
             
         print(f"📥 Chargement: {path}")
         self.df = self.spark.read.parquet(path)
@@ -44,9 +55,13 @@ class ParquetReader:
         return self
         
     def show_stats(self):
-        """Affiche les statistiques générales"""
-        print("\n📈 Statistiques:")
-        self.df.describe().show()
+        """Affiche les statistiques par source"""
+        print("\n📈 Répartition par source:")
+        self.df.groupBy("source").agg(
+            count("*").alias("nb_lignes"),
+            min("year").alias("année_min"),
+            max("year").alias("année_max")
+        ).show()
         return self
         
     def show_sample(self, n=10):
@@ -55,12 +70,33 @@ class ParquetReader:
         self.df.show(n, truncate=False)
         return self
         
-    def query(self, sql):
-        """Exécute une requête SQL"""
-        self.df.createOrReplaceTempView("data")
-        result = self.spark.sql(sql)
-        result.show(truncate=False)
-        return result
+    def show_analysis(self):
+        """Affiche des analyses"""
+        # Stats générales
+        print("\n📈 Statistiques générales:")
+        nb_villes = self.df.select("City").distinct().count()
+        nb_pays = self.df.select("Country").distinct().count()
+        print(f"   • Villes: {nb_villes:,}")
+        print(f"   • Pays: {nb_pays}")
+        
+        # Top 5 villes chaudes (données récentes)
+        print("\n🌡️  Top 5 villes les plus chaudes (données récentes):")
+        self.df.filter(col("year") >= 2010) \
+            .groupBy("City", "Country") \
+            .agg(avg("temperature_moyenne").alias("temp_moy")) \
+            .orderBy(desc("temp_moy")) \
+            .show(5)
+            
+        # Comparaison batch vs streaming si les deux existent
+        sources = [row.source for row in self.df.select("source").distinct().collect()]
+        if len(sources) > 1:
+            print("\n🔄 Comparaison Batch vs Streaming:")
+            self.df.groupBy("source").agg(
+                count("*").alias("nb_enregistrements"),
+                avg("temperature_moyenne").alias("temp_moyenne_globale")
+            ).show()
+        
+        return self
         
     def stop(self):
         """Arrête Spark"""
@@ -68,80 +104,31 @@ class ParquetReader:
             self.spark.stop()
 
 
-def read_batch_results():
-    """Lit les résultats du traitement batch"""
+def read_results():
+    """Lit et affiche les résultats unifiés"""
     print("=" * 70)
-    print("LECTURE DES RÉSULTATS BATCH")
+    print("LECTURE DES RÉSULTATS UNIFIÉS (BATCH + STREAMING)")
     print("=" * 70)
     
     reader = ParquetReader()
-    path = f"{PATHS['data_output']}/temperature_ville_annee.parquet"
-    
-    if not os.path.exists(path):
-        # Fallback vers l'ancien chemin
-        path = "resultats/temperature_ville_annee.parquet"
-        
-    reader.load(path).show_schema().show_sample()
-    
-    # Quelques analyses
-    print("\n🔍 Top 5 villes les plus chaudes (2013):")
-    reader.df.filter(col("year") == 2013) \
-        .orderBy(desc("temperature_moyenne")) \
-        .select("City", "Country", "temperature_moyenne") \
-        .show(5)
-        
-    print("\n🔍 Évolution Paris (dernières années):")
-    reader.df.filter((col("City") == "Paris") & (col("Country") == "France")) \
-        .orderBy(desc("year")) \
-        .show(10)
-        
-    reader.stop()
+    if reader.load():
+        reader.show_schema()
+        reader.show_stats()
+        reader.show_sample()
+        reader.show_analysis()
+        reader.stop()
 
+
+# Compatibilité avec l'ancien code
+def read_batch_results():
+    read_results()
 
 def read_streaming_results():
-    """Lit les résultats du streaming"""
-    print("=" * 70)
-    print("LECTURE DES RÉSULTATS STREAMING")
-    print("=" * 70)
-    
-    reader = ParquetReader()
-    path = PATHS['streaming_output']
-    
-    if not os.path.exists(path):
-        path = "resultats/streaming_meteo"
-        
-    if not os.path.exists(path):
-        print("❌ Aucun résultat de streaming trouvé")
-        return
-        
-    reader.load(path).show_schema().show_sample()
-    
-    # Stats par ville
-    print("\n📈 Statistiques par ville:")
-    reader.df.groupBy("city") \
-        .agg(
-            count("*").alias("nb_mesures"),
-            avg("temperature_celsius").alias("temp_moy"),
-            max("temperature_celsius").alias("temp_max"),
-            min("temperature_celsius").alias("temp_min")
-        ) \
-        .orderBy("city") \
-        .show()
-        
-    reader.stop()
+    read_results()
 
 
 def main():
-    import argparse
-    parser = argparse.ArgumentParser(description='Lecteur de résultats Parquet')
-    parser.add_argument('type', choices=['batch', 'streaming', 'both'], 
-                       default='both', nargs='?', help='Type de résultats à lire')
-    args = parser.parse_args()
-    
-    if args.type in ['batch', 'both']:
-        read_batch_results()
-    if args.type in ['streaming', 'both']:
-        read_streaming_results()
+    read_results()
 
 
 if __name__ == "__main__":

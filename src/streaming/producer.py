@@ -26,7 +26,7 @@ class WeatherProducer:
     def __init__(self, mode='simulation', kafka_enabled=False):
         """
         Args:
-            mode: 'simulation' ou 'api' (OpenMeteo gratuit)
+            mode: 'simulation', 'api' (OpenMeteo), ou 'windy'
             kafka_enabled: True pour envoyer vers Kafka
         """
         self.mode = mode
@@ -34,6 +34,8 @@ class WeatherProducer:
         self.producer = None
         self.output_dir = PATHS['streaming_input']
         self.iteration = 0
+        self.windy_api_key = API_KEYS.get('windy', '')
+        self.openweather_api_key = API_KEYS.get('openweather', '')
         
         os.makedirs(self.output_dir, exist_ok=True)
         
@@ -104,10 +106,98 @@ class WeatherProducer:
         except Exception as e:
             print(f"  ✗ Open-Meteo {city_info['city']}: {e}")
             return self._fetch_simulated(city_info)
+    
+    def _fetch_windy(self, city_info):
+        """Récupère les données depuis Windy API"""
+        try:
+            url = "https://api.windy.com/api/point-forecast/v2"
+            
+            payload = {
+                "lat": city_info['lat'],
+                "lon": city_info['lon'],
+                "model": "gfs",
+                "parameters": ["temp", "wind", "rh", "pressure", "precip"],
+                "levels": ["surface"],
+                "key": self.windy_api_key
+            }
+            
+            response = requests.post(url, json=payload, timeout=10)
+            response.raise_for_status()
+            data = response.json()
+            
+            # Extraire les données (première valeur = maintenant)
+            temp = data.get("temp-surface", [None])[0]
+            wind_u = data.get("wind_u-surface", [0])[0]
+            wind_v = data.get("wind_v-surface", [0])[0]
+            humidity = data.get("rh-surface", [None])[0]
+            pressure = data.get("pressure-surface", [None])[0]
+            precip = data.get("precip-surface", [0])[0]
+            
+            # Conversions
+            temp_celsius = (float(temp) - 273.15) if temp else None
+            wind_speed = (wind_u**2 + wind_v**2)**0.5 if (wind_u and wind_v) else 0
+            wind_dir = (math.atan2(wind_u, wind_v) * 180 / math.pi + 180) % 360 if (wind_u or wind_v) else 0
+            pressure_hpa = (float(pressure) / 100.0) if pressure else None
+            
+            return {
+                'city': city_info['city'],
+                'country': city_info['country'],
+                'lat': city_info['lat'],
+                'lon': city_info['lon'],
+                'timestamp': datetime.now().isoformat(),
+                'temperature_celsius': round(temp_celsius, 2) if temp_celsius else None,
+                'wind_speed_kmh': round(wind_speed * 3.6, 2),
+                'wind_direction_deg': int(wind_dir),
+                'humidity_percent': round(float(humidity), 1) if humidity else None,
+                'pressure_hpa': round(pressure_hpa, 1) if pressure_hpa else None,
+                'source': 'windy'
+            }
+        except Exception as e:
+            print(f"  ✗ Windy {city_info['city']}: {e}")
+            return self._fetch_simulated(city_info)
+    
+    def _fetch_openweather(self, city_info):
+        """Récupère les données depuis OpenWeatherMap API"""
+        try:
+            url = "https://api.openweathermap.org/data/2.5/weather"
+            params = {
+                "lat": city_info['lat'],
+                "lon": city_info['lon'],
+                "appid": self.openweather_api_key,
+                "units": "metric"
+            }
+            
+            response = requests.get(url, params=params, timeout=10)
+            response.raise_for_status()
+            data = response.json()
+            
+            main = data.get('main', {})
+            wind = data.get('wind', {})
+            
+            return {
+                'city': city_info['city'],
+                'country': city_info['country'],
+                'lat': city_info['lat'],
+                'lon': city_info['lon'],
+                'timestamp': datetime.now().isoformat(),
+                'temperature_celsius': round(main.get('temp', 0), 2),
+                'wind_speed_kmh': round(wind.get('speed', 0) * 3.6, 2),
+                'wind_direction_deg': int(wind.get('deg', 0)),
+                'humidity_percent': round(main.get('humidity', 0), 1),
+                'pressure_hpa': round(main.get('pressure', 0), 1),
+                'source': 'openweather'
+            }
+        except Exception as e:
+            print(f"  ✗ OpenWeatherMap {city_info['city']}: {e}")
+            return self._fetch_simulated(city_info)
             
     def fetch_weather(self, city_info):
         """Récupère les données météo selon le mode"""
-        if self.mode == 'api':
+        if self.mode == 'windy':
+            return self._fetch_windy(city_info)
+        elif self.mode == 'openweather':
+            return self._fetch_openweather(city_info)
+        elif self.mode == 'api':
             return self._fetch_openmeteo(city_info)
         return self._fetch_simulated(city_info)
         
@@ -187,8 +277,8 @@ def main():
     """Point d'entrée - Mode simulation par défaut"""
     import argparse
     parser = argparse.ArgumentParser(description='Producteur de données météo')
-    parser.add_argument('--mode', choices=['simulation', 'api'], default='simulation',
-                       help='Mode de génération des données')
+    parser.add_argument('--mode', choices=['simulation', 'api', 'windy', 'openweather'], default='simulation',
+                       help='Mode de génération des données (simulation, api=Open-Meteo, windy=API Windy, openweather=OpenWeatherMap)')
     parser.add_argument('--kafka', action='store_true', help='Activer Kafka')
     parser.add_argument('--iterations', type=int, default=0, help='Nombre d\'itérations (0=infini)')
     args = parser.parse_args()

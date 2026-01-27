@@ -9,7 +9,8 @@ Deux modes de consommation:
 
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (col, window, avg, max, min, count, 
-                                   current_timestamp, from_json, to_timestamp)
+                                   current_timestamp, from_json, to_timestamp,
+                                   lit, year as spark_year, round as spark_round)
 from pyspark.sql.types import (StructType, StructField, StringType, 
                                DoubleType, IntegerType, TimestampType)
 import os
@@ -107,19 +108,32 @@ class WeatherConsumer:
             .withWatermark("event_time", STREAMING_CONFIG['watermark_delay']) \
             .groupBy(
                 window("event_time", STREAMING_CONFIG['window_duration']),
-                "city"
+                "city",
+                "country"
             ) \
             .agg(
                 count("*").alias("nb_mesures"),
-                avg("temperature_celsius").alias("temp_moyenne"),
+                spark_round(avg("temperature_celsius"), 2).alias("temperature_moyenne"),
                 max("temperature_celsius").alias("temp_max"),
                 min("temperature_celsius").alias("temp_min"),
                 avg("wind_speed_kmh").alias("vent_moyen_kmh"),
                 avg("humidity_percent").alias("humidite_moyenne"),
                 avg("pressure_hpa").alias("pression_moyenne")
             )
+        
+        # Format unifié pour le parquet (même structure que batch)
+        df_unified = df_windowed \
+            .withColumn("year", spark_year(col("window.start"))) \
+            .withColumn("source", lit("streaming")) \
+            .select(
+                col("city").alias("City"),
+                col("country").alias("Country"),
+                "year",
+                "temperature_moyenne",
+                "source"
+            )
             
-        return df_enriched, df_windowed
+        return df_enriched, df_windowed, df_unified
         
     def run(self, output_console=True, output_parquet=True):
         """Lance le streaming"""
@@ -138,7 +152,7 @@ class WeatherConsumer:
         print("✅ Stream configuré")
         
         # Créer les agrégations
-        df_enriched, df_windowed = self._create_aggregations(df_stream)
+        df_enriched, df_windowed, df_unified = self._create_aggregations(df_stream)
         
         # Output vers la console
         if output_console:
@@ -152,16 +166,16 @@ class WeatherConsumer:
                 .start()
             self.queries.append(query_console)
             
-        # Output vers Parquet
+        # Output vers Parquet unifié (même structure que batch)
         if output_parquet:
-            output_path = PATHS['streaming_output']
+            output_path = f"{PATHS['results']}/temperatures.parquet"
             checkpoint_path = f"{PATHS['checkpoints']}/weather_streaming"
-            os.makedirs(output_path, exist_ok=True)
+            os.makedirs(PATHS['results'], exist_ok=True)
             os.makedirs(checkpoint_path, exist_ok=True)
             
-            print(f"💾 Activation de la sauvegarde Parquet: {output_path}")
+            print(f"💾 Sauvegarde vers Parquet unifié: {output_path}")
             
-            query_parquet = df_enriched \
+            query_parquet = df_unified \
                 .writeStream \
                 .outputMode("append") \
                 .format("parquet") \
