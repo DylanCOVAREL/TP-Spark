@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  spark-jupyter:
+    build: .
+    container_name: tp-spark-jupyter
+    ports:
+      - "8888:8888"  # Jupyter Notebook
+      - "4040:4040"  # Spark UI
+    volumes:
+      - ./:/app
+      - ./data:/app/data  # Dossier pour les données
+      - ./etl_output:/app/etl_output  # Dossier pour les résultats
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - SPARK_LOCAL_IP=0.0.0.0
+    restart: unless-stopped
