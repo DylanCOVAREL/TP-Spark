@@ -1,141 +1,208 @@
-# TP Spark - Analyse des Températures Globales 🌍
+# 🌡️ Projet Traitement des Données - Spark Batch & Streaming
 
-Pipeline ETL avec Apache Spark pour analyser les données de température par ville (Kaggle).
+Pipeline de traitement de données météorologiques avec Apache Spark.
 
-## 🚀 Démarrage rapide avec Docker
+## 📁 Structure du projet
+
+```
+📦 Traitement des données - TP/
+├── 📄 run.py                    # Point d'entrée unique
+├── 📄 requirements.txt          # Dépendances Python
+├── 📄 docker-compose-kafka.yaml # Kafka (optionnel)
+├── 📄 GlobalLandTemperaturesByCity.csv  # Données historiques
+│
+├── 📂 src/                      # Code source
+│   ├── 📄 config.py             # Configuration centralisée
+│   │
+│   ├── 📂 batch/                # Traitement par lots
+│   │   └── 📄 etl_temperature.py
+│   │
+│   ├── 📂 streaming/            # Traitement temps réel
+│   │   ├── 📄 producer.py       # Génère les données météo
+│   │   └── 📄 consumer.py       # Traite les données en streaming
+│   │
+│   └── 📂 utils/                # Utilitaires
+│       └── 📄 reader.py         # Lecture des résultats
+│
+└── 📂 data/                     # Données (auto-généré)
+    ├── 📂 output/               # Résultats batch
+    ├── 📂 streaming_input/      # Fichiers pour streaming
+    ├── 📂 streaming_output/     # Résultats streaming
+    └── 📂 checkpoints/          # Checkpoints Spark
+```
+
+## 🚀 Démarrage rapide
 
 ### Prérequis
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installé
-- Le fichier CSV `GlobalLandTemperaturesByCity.csv` téléchargé depuis [Kaggle](https://www.kaggle.com/)
-
-### Installation en 3 étapes
-
-1. **Cloner le repo**
 ```bash
-git clone https://github.com/DylanCOVAREL/TP-Spark.git
-cd TP-Spark
+pip install -r requirements.txt
 ```
 
-2. **Placer le fichier CSV**
-- Télécharger `GlobalLandTemperaturesByCity.csv` depuis Kaggle
-- Le placer dans le dossier du projet
-
-3. **Lancer Docker**
+### 1️⃣ Traitement Batch (ETL)
+Analyse des températures historiques par ville et année:
 ```bash
-docker-compose up --build
+python run.py batch
 ```
 
-### 📊 Accéder aux interfaces
+### 2️⃣ Streaming en temps réel
 
-Une fois les conteneurs démarrés :
+**Terminal 1 - Producteur** (génère des données météo):
+```bash
+# Mode simulation (données aléatoires)
+python run.py producer
 
-- **Jupyter Notebook** : http://localhost:8888
-  - Le token d'accès s'affiche dans le terminal
-  - Ouvrir `etl_temperature_simple.ipynb`
+# Mode API réelle (Open-Meteo gratuit)
+python run.py producer --api
+```
 
+**Terminal 2 - Consommateur** (traite les données):
+```bash
+python run.py consumer
+```
+
+### 3️⃣ Lire les résultats
+```bash
+python run.py read          # Tous les résultats
+python run.py read batch    # Résultats batch uniquement
+python run.py read streaming # Résultats streaming uniquement
+```
+
+## 📊 Fonctionnalités
+
+### Batch (ETL)
+- **Extract**: Charge le CSV des températures mondiales (8M+ lignes)
+- **Transform**: Nettoie, extrait l'année, calcule les moyennes
+- **Load**: Sauvegarde en Parquet, CSV, JSON
+
+### Streaming
+- **Producteur**: Génère des données météo (simulation ou API Open-Meteo)
+- **Consommateur**: Agrégations par fenêtre temporelle avec Spark Structured Streaming
+- **Formats**: Fichiers CSV ou Kafka
+
+## ⚙️ Configuration
+
+Modifiez `src/config.py` pour personnaliser:
+- Chemins des données
+- Paramètres Spark (mémoire, partitions)
+- Configuration Kafka
+- Clés API météo
+- Villes surveillées
+- Paramètres de fenêtrage
+
+## 🐳 Kafka (optionnel)
+
+Pour utiliser Kafka:
+```bash
+# Démarrer Kafka
+docker compose -f docker-compose-kafka.yaml up -d
+
+# Producteur vers Kafka
+python run.py producer --kafka
+
+# Consommateur depuis Kafka
+python run.py consumer --kafka
+```
+
+## 📈 Spark UI
+
+Pendant l'exécution, accédez à l'interface Spark: **http://localhost:4040**
+
+## 🔧 Commandes
+
+| Commande | Description |
+|----------|-------------|
+| `python run.py batch` | Pipeline ETL batch |
+| `python run.py producer` | Producteur (simulation) |
+| `python run.py producer --api` | Producteur (API réelle) |
+| `python run.py producer --kafka` | Producteur vers Kafka |
+| `python run.py consumer` | Consommateur (fichiers) |
+| `python run.py consumer --kafka` | Consommateur Kafka |
+| `python run.py read` | Lire les résultats |
+
+---
+
+## 📚 Ancienne documentation
+
+<details>
+<summary>Cliquez pour voir l'ancienne documentation Docker</summary>
+
+### Avec Docker
+
+```bash
+docker compose exec spark-jupyter python lire_parquet.py
+```
+
+**Avec PySpark** :
+```bash
+docker compose exec spark-jupyter python lire_parquet_spark.py
+```
+
+---
+
+## 🌊 Partie 2 : Streaming Temps Réel (API Windy)
+
+### Configuration de l'API Windy
+
+1. Créer un compte sur https://api.windy.com/
+2. Obtenir une clé API
+3. Éditer `streaming_windy.py` :
+```python
+WINDY_API_KEY = "votre_cle_api_ici"
+```
+
+### Lancer le Streaming
+
+```bash
+docker compose exec spark-jupyter python streaming_windy.py
+```
+
+**Ce que ça fait** :
+- Récupère les données météo de 5 villes toutes les 10 secondes
+- Températures en temps réel (API Windy)
+- Conversion automatique Kelvin → Celsius
+- Sauvegarde en Parquet
+
+### Lire les résultats Streaming
+
+```bash
+docker compose exec spark-jupyter python lire_streaming_results.py
+```
+
+**Analyses disponibles** :
+- Dernières mesures par ville
+- Statistiques (moyenne, max, min)
+- Évolution temporelle
+- Classement par température
+
+---
+
+## 🔥 Mode Production : Kafka (Optionnel)
+
+Pour un vrai streaming production avec Kafka :
+
+### 1. Démarrer Kafka
+```bash
+# Arrêter le conteneur simple
+docker compose down
+
+# Démarrer avec Kafka
+docker compose -f docker-compose-kafka.yaml up -d
+```
+
+### 2. Interfaces
+- **Kafka UI** : http://localhost:8080
 - **Spark UI** : http://localhost:4040
-  - Monitoring des jobs Spark en temps réel
-  - Disponible après avoir lancé des cellules Spark
 
-### 🛠️ Utilisation
+### 3. Lancer le producteur et consommateur
 
-1. Ouvrir le notebook `etl_temperature_simple.ipynb` dans Jupyter
-2. Exécuter les cellules une par une (Shift + Enter)
-3. Les résultats seront sauvegardés dans `etl_output/`
-
-### 📁 Structure du projet
-
-```
-TP-Spark/
-├── Dockerfile                          # Configuration Docker
-├── docker-compose.yaml                 # Orchestration des services
-├── requirements.txt                    # Dépendances Python
-├── etl_temperature_simple.ipynb        # Notebook principal (simplifié)
-├── GlobalLandTemperaturesByCity.csv    # Données (non versionnées)
-├── etl_output/                         # Résultats générés
-└── README.md                           # Ce fichier
-```
-
-### 🧹 Arrêter et nettoyer
-
+**Terminal 1** :
 ```bash
-# Arrêter les conteneurs
-docker-compose down
-
-# Supprimer les volumes (données)
-docker-compose down -v
-
-# Supprimer les images
-docker-compose down --rmi all
+docker compose -f docker-compose-kafka.yaml exec spark-streaming python kafka_producer_windy.py
 ```
 
-## 📝 Que fait ce pipeline ?
-
-### Extract (Extraction)
-- Charge le CSV (8M+ lignes) avec Spark
-- Inférence automatique du schéma
-
-### Transform (Transformation)
-- Nettoyage des valeurs manquantes
-- Conversion des dates
-- Extraction année/mois
-
-### Load (Chargement)
-- Sauvegarde en Parquet (partitionné par année)
-- Export CSV et JSON pour analyses
-- Génération de rapports
-
-### Analyses incluses
-- ✅ Top 10 pays les plus chauds/froids
-- ✅ Évolution temporelle (par année et décennie)
-- ✅ Détection des températures extrêmes
-- ✅ Analyse du réchauffement climatique
-- ✅ Saisonnalité (température par mois)
-
-## 🤝 Travail en équipe
-
-### Pour les membres de l'équipe :
-
-1. Cloner le repo
-2. Télécharger le CSV depuis Kaggle
-3. Lancer `docker-compose up`
-4. C'est tout ! Pas d'installation Python/Spark/Java nécessaire
-
-### Pour partager vos modifications :
-
+**Terminal 2** :
 ```bash
-git add .
-git commit -m "Description de vos changements"
-git push
+docker compose -f docker-compose-kafka.yaml exec spark-streaming python kafka_consumer_spark.py
 ```
 
-## 📚 Ressources
-
-- [Documentation PySpark](https://spark.apache.org/docs/latest/api/python/)
-- [Dataset Kaggle](https://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data)
-- [Spark SQL Guide](https://spark.apache.org/docs/latest/sql-programming-guide.html)
-
-## ⚠️ Notes importantes
-
-- Le fichier CSV (499 MB) n'est **pas versionné** sur Git (trop volumineux)
-- Chaque membre doit le télécharger séparément depuis Kaggle
-- Les résultats dans `etl_output/` ne sont pas versionnés non plus
-
-## 🐛 Problèmes courants
-
-**Jupyter ne démarre pas ?**
-- Vérifier que Docker Desktop est bien lancé
-- Vérifier que les ports 8888 et 4040 ne sont pas déjà utilisés
-
-**Spark UI ne s'affiche pas ?**
-- Normal, il n'apparaît qu'après avoir exécuté des cellules Spark dans le notebook
-
-**Out of Memory ?**
-- Augmenter la RAM allouée à Docker (Settings > Resources > Memory)
-- Recommandé : minimum 4 GB
-
-## 👥 Équipe
-
-- Dylan COVAREL
-- [Membre 2]
-- [Membre 3]
+</details>

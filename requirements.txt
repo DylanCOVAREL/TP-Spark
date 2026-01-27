@@ -1,7 +1,18 @@
+# Core
 pyspark==3.5.0
-jupyter==1.0.0
-notebook==7.0.6
 pandas==2.1.4
 numpy==1.26.2
+
+# Jupyter (optionnel)
+jupyter==1.0.0
+notebook==7.0.6
+
+# Visualisation (optionnel)
 matplotlib==3.8.2
 seaborn==0.13.0
+
+# API et Streaming
+requests==2.31.0
+
+# Kafka (optionnel - si vous utilisez Kafka)
+# kafka-python==2.0.2
