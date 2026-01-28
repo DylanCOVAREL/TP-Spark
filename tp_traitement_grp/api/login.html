@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Climate Client • Login</title>
+  <style>
+    :root{
+      --bg:#0b1020; --card:#121a33; --muted:#93a4c7; --text:#e9efff;
+      --accent:#6ea8ff; --good:#23c483; --bad:#ff5c7a; --border:rgba(255,255,255,.10);
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: radial-gradient(1200px 700px at 20% 10%, rgba(110,168,255,.25), transparent 55%),
+                  radial-gradient(900px 600px at 80% 30%, rgba(35,196,131,.18), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      min-height:100vh; display:flex; align-items:center; justify-content:center;
+      padding:24px;
+    }
+    .wrap{width:min(980px, 100%)}
+    .top{display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:18px}
+    .brand h1{margin:0; font-size:28px; letter-spacing:.3px}
+    .brand p{margin:6px 0 0; color:var(--muted)}
+    .hint{color:var(--muted); font-size:13px; text-align:right}
+    .grid{display:grid; grid-template-columns: 1.2fr .8fr; gap:16px}
+    @media (max-width:900px){ .grid{grid-template-columns:1fr} .hint{text-align:left} }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--border);
+      border-radius:18px;
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    .card h2{margin:0 0 10px; font-size:16px; letter-spacing:.2px}
+    .row{display:flex; gap:10px; flex-wrap:wrap}
+    .field{display:flex; flex-direction:column; gap:6px; flex:1; min-width:240px}
+    label{font-size:12px; color:var(--muted)}
+    input{
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(8,12,24,.6);
+      color:var(--text);
+      outline:none;
+    }
+    input:focus{border-color: rgba(110,168,255,.65); box-shadow: 0 0 0 3px rgba(110,168,255,.15);}
+    .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    button{
+      padding:11px 14px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(110,168,255,.18);
+      color:var(--text);
+      cursor:pointer;
+      font-weight:600;
+    }
+    button:hover{background: rgba(110,168,255,.26);}
+    button.secondary{background: rgba(255,255,255,.06);}
+    button.secondary:hover{background: rgba(255,255,255,.10);}
+    .status{margin-top:10px; font-size:13px}
+    .ok{color:var(--good); font-weight:700}
+    .err{color:var(--bad); font-weight:700}
+
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:12px;
+      margin-top:10px;
+    }
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;}
+    pre{
+      margin:12px 0 0;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.25);
+      color: #dbe7ff;
+      overflow:auto;
+      display:none;
+      max-height:180px;
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <h1>Climate Analytics Client</h1>
+        <p>JWT + API Key + Quota • Front</p>
+      </div>
+      <div class="hint">
+        API par défaut: <span class="mono">http://127.0.0.1:8000</span><br/>
+        Swagger: <a href="http://127.0.0.1:8000/docs" target="_blank" rel="noreferrer">/docs</a>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Login</h2>
+        <div class="row">
+          <div class="field">
+            <label>API base URL</label>
+            <input id="apiBase" value="http://127.0.0.1:8000" />
+          </div>
+          <div class="field">
+            <label>X-API-Key</label>
+            <input id="apiKey" placeholder="ex: my-super-api-key" />
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:10px">
+          <div class="field">
+            <label>Username</label>
+            <input id="username" value="admin" />
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input id="password" type="password" value="secret" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="loginBtn">Login</button>
+          <button id="checkBtn" class="secondary">Check /auth/check</button>
+          <button id="clearBtn" class="secondary">Clear session</button>
+        </div>
+
+        <div id="status" class="status"></div>
+        <pre id="tokenBox"></pre>
+
+        <div class="pill">
+          Tip: le token et la clé sont stockés en <span class="mono">sessionStorage</span> (onglet).
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>What this does</h2>
+        <p style="color:var(--muted); margin:0">
+          Ce front reproduit ce que tu faisais en PowerShell:
+        </p>
+        <pre class="mono" style="display:block; margin-top:10px">
+POST /token  (form urlencoded)
+→ reçoit access_token
+
+Puis sur chaque endpoint:
+Authorization: Bearer &lt;token&gt;
+X-API-Key: &lt;api_key&gt;
+
+Si quota dépassé → 429 + Retry-After
+        </pre>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+
+  function setStatus(msg, ok=true) {
+    $("status").innerHTML = ok
+      ? `<span class="ok">✅ ${escapeHtml(msg)}</span>`
+      : `<span class="err">❌ ${escapeHtml(msg)}</span>`;
+  }
+
+  function escapeHtml(str){
+    return String(str)
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;");
+  }
+
+  function loadSession() {
+    const apiBase = sessionStorage.getItem("apiBase");
+    const apiKey = sessionStorage.getItem("apiKey");
+    const token = sessionStorage.getItem("accessToken");
+
+    if (apiBase) $("apiBase").value = apiBase;
+    if (apiKey) $("apiKey").value = apiKey;
+
+    if (token) {
+      $("tokenBox").style.display = "block";
+      $("tokenBox").textContent = token;
+      setStatus("Session found (token already stored). You can go to the app page.", true);
+    }
+  }
+
+  function saveSession({ apiBase, apiKey, token }) {
+    sessionStorage.setItem("apiBase", apiBase);
+    sessionStorage.setItem("apiKey", apiKey);
+    sessionStorage.setItem("accessToken", token);
+  }
+
+  function getHeaders() {
+    const apiKey = $("apiKey").value.trim();
+    const token = sessionStorage.getItem("accessToken");
+    if (!apiKey) throw new Error("Missing X-API-Key.");
+    if (!token) throw new Error("Missing JWT (login first).");
+    return {
+      "Authorization": `Bearer ${token}`,
+      "X-API-Key": apiKey,
+    };
+  }
+
+  async function login() {
+    const apiBase = $("apiBase").value.trim();
+    const apiKey = $("apiKey").value.trim();
+    const username = $("username").value.trim();
+    const password = $("password").value;
+
+    if (!apiBase) throw new Error("Missing API base URL.");
+    if (!apiKey) throw new Error("Missing X-API-Key.");
+    if (!username || !password) throw new Error("Missing username/password.");
+
+    // call /token (form urlencoded)
+    const body = new URLSearchParams({ username, password });
+
+    const res = await fetch(`${apiBase}/token`, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body
+    });
+
+    if (!res.ok) {
+      const txt = await res.text();
+      throw new Error(`Login failed (${res.status}): ${txt}`);
+    }
+
+    const data = await res.json();
+    const token = data.access_token;
+
+    saveSession({ apiBase, apiKey, token });
+
+    $("tokenBox").style.display = "block";
+    $("tokenBox").textContent = token;
+
+    setStatus("Logged in. Redirecting to app…", true);
+    setTimeout(() => { window.location.href = "app.html"; }, 350);
+  }
+
+  async function checkAuth() {
+    const apiBase = $("apiBase").value.trim();
+    sessionStorage.setItem("apiBase", apiBase);
+    sessionStorage.setItem("apiKey", $("apiKey").value.trim());
+
+    const headers = getHeaders();
+    const res = await fetch(`${apiBase}/auth/check`, { headers });
+
+    if (!res.ok) {
+      const retryAfter = res.headers.get("Retry-After");
+      const txt = await res.text();
+      const extra = retryAfter ? ` (Retry-After: ${retryAfter}s)` : "";
+      throw new Error(`Auth check failed (${res.status})${extra}: ${txt}`);
+    }
+
+    const data = await res.json();
+    setStatus(`Auth OK. user=${data.user}`, true);
+  }
+
+  $("loginBtn").addEventListener("click", async () => {
+    try { await login(); } catch(e) { setStatus(e.message, false); }
+  });
+
+  $("checkBtn").addEventListener("click", async () => {
+    try { await checkAuth(); } catch(e) { setStatus(e.message, false); }
+  });
+
+  $("clearBtn").addEventListener("click", () => {
+    sessionStorage.clear();
+    $("tokenBox").style.display = "none";
+    $("tokenBox").textContent = "";
+    setStatus("Session cleared.", true);
+  });
+
+  loadSession();
+</script>
+</body>
+</html>

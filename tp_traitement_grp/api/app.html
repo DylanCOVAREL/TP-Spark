@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Climate Client • Dashboard</title>
+  <style>
+    :root{
+      --bg:#0b1020; --card:#121a33; --muted:#93a4c7; --text:#e9efff;
+      --accent:#6ea8ff; --good:#23c483; --bad:#ff5c7a; --border:rgba(255,255,255,.10);
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: radial-gradient(1200px 700px at 20% 10%, rgba(110,168,255,.25), transparent 55%),
+                  radial-gradient(900px 600px at 80% 30%, rgba(35,196,131,.18), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      min-height:100vh;
+      padding:24px;
+    }
+    .wrap{max-width:1200px; margin:0 auto}
+    .topbar{display:flex; justify-content:space-between; align-items:flex-end; gap:16px; margin-bottom:16px}
+    h1{margin:0; font-size:26px}
+    .meta{color:var(--muted); font-size:13px}
+    .meta .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
+    .actions{display:flex; gap:10px; flex-wrap:wrap}
+    button{
+      padding:10px 12px; border-radius:12px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color:var(--text); cursor:pointer; font-weight:700;
+    }
+    button:hover{background: rgba(255,255,255,.10)}
+    button.primary{background: rgba(110,168,255,.18)}
+    button.primary:hover{background: rgba(110,168,255,.26)}
+
+    .grid{display:grid; grid-template-columns: 420px 1fr; gap:16px}
+    @media (max-width:1050px){ .grid{grid-template-columns:1fr} }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--border);
+      border-radius:18px;
+      box-shadow: var(--shadow);
+      padding:16px;
+    }
+
+    .sectionTitle{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px}
+    .sectionTitle h2{margin:0; font-size:14px; letter-spacing:.2px; color: #dbe7ff}
+    .pill{
+      font-size:12px; color:var(--muted);
+      border:1px solid rgba(255,255,255,.12);
+      padding:6px 10px; border-radius:999px;
+      background: rgba(255,255,255,.06);
+    }
+
+    .field{display:flex; flex-direction:column; gap:6px; margin:10px 0}
+    label{font-size:12px; color:var(--muted)}
+    input, select{
+      padding:11px 12px; border-radius:12px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(8,12,24,.6);
+      color:var(--text); outline:none;
+    }
+    input:focus, select:focus{border-color: rgba(110,168,255,.65); box-shadow: 0 0 0 3px rgba(110,168,255,.15);}
+
+    .endpointBtn{
+      width:100%;
+      background: rgba(110,168,255,.16);
+      border:1px solid rgba(110,168,255,.22);
+      text-align:left;
+      padding:12px 12px;
+      border-radius:14px;
+      display:flex; justify-content:space-between; align-items:center;
+      gap:10px;
+      font-weight:800;
+    }
+    .endpointBtn:hover{background: rgba(110,168,255,.24)}
+    .path{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color:#cfe0ff; font-weight:800}
+    .desc{font-size:12px; color:var(--muted); font-weight:600}
+
+    .status{margin-top:10px; font-size:13px}
+    .ok{color:var(--good); font-weight:800}
+    .err{color:var(--bad); font-weight:800}
+
+    .resultWrap{display:flex; flex-direction:column; gap:12px}
+    .toolbar{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .toolbar input{min-width:260px}
+    pre{
+      margin:0;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.25);
+      color: #dbe7ff;
+      overflow:auto;
+      max-height:520px;
+    }
+    table{width:100%; border-collapse:collapse; border-radius:14px; overflow:hidden}
+    th, td{border-bottom:1px solid rgba(255,255,255,.08); padding:10px 10px; text-align:left; font-size:13px}
+    th{color:#cfe0ff; background: rgba(255,255,255,.04); position:sticky; top:0}
+    .tableWrap{border:1px solid rgba(255,255,255,.10); border-radius:14px; overflow:auto; max-height:520px}
+    .muted{color:var(--muted)}
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div>
+        <h1>Dashboard</h1>
+        <div class="meta">
+          API: <span class="mono" id="apiBaseLabel"></span> •
+          Auth: <span id="authLabel" class="muted">not checked</span>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="checkAuthBtn" class="primary">Check auth</button>
+        <button id="goLoginBtn">Go to login</button>
+        <button id="logoutBtn">Logout</button>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- LEFT: endpoint picker -->
+      <div class="card">
+        <div class="sectionTitle">
+          <h2>Endpoints</h2>
+          <span class="pill">JWT + X-API-Key required</span>
+        </div>
+
+        <div class="field">
+          <label>Choose endpoint</label>
+          <select id="endpointSelect"></select>
+        </div>
+
+        <div id="paramsArea"></div>
+
+        <button id="executeBtn" class="endpointBtn">
+          <div>
+            <div class="path" id="pathLabel"></div>
+            <div class="desc" id="descLabel"></div>
+          </div>
+          <div>▶</div>
+        </button>
+
+        <div id="status" class="status"></div>
+      </div>
+
+      <!-- RIGHT: result -->
+      <div class="card resultWrap">
+        <div class="sectionTitle">
+          <h2>Result</h2>
+          <span class="pill" id="resultMeta">—</span>
+        </div>
+
+        <div class="toolbar">
+          <input id="searchBox" placeholder="Search in table (client-side)..." />
+          <button id="copyJsonBtn">Copy JSON</button>
+          <button id="clearResultBtn">Clear</button>
+        </div>
+
+        <div id="result"></div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+
+  // --- endpoints config (all your endpoints)
+  const endpoints = [
+    {
+      id: "check",
+      name: "Auth check",
+      method: "GET",
+      path: "/auth/check",
+      description: "Validate JWT + API Key quickly",
+      params: []
+    },
+    {
+      id: "global_yearly",
+      name: "Global yearly trend",
+      method: "GET",
+      path: "/temperature/global/yearly",
+      description: "Optional filters: year_min, year_max",
+      params: [
+        { key:"year_min", label:"year_min", type:"number", placeholder:"e.g. 1800", optional:true },
+        { key:"year_max", label:"year_max", type:"number", placeholder:"e.g. 2020", optional:true },
+      ]
+    },
+    {
+      id: "top_cities",
+      name: "Top hottest cities",
+      method: "GET",
+      path: "/temperature/top-cities",
+      description: "top_n (1..200)",
+      params: [
+        { key:"top_n", label:"top_n", type:"number", placeholder:"10", optional:true, defaultValue:"10" },
+      ]
+    },
+    {
+      id: "country_avg",
+      name: "Avg temp by country",
+      method: "GET",
+      path: "/temperature/country/avg",
+      description: "top_n + contains",
+      params: [
+        { key:"top_n", label:"top_n", type:"number", placeholder:"30", optional:true, defaultValue:"30" },
+        { key:"contains", label:"contains", type:"text", placeholder:"e.g. fra", optional:true },
+      ]
+    },
+    {
+      id: "country_yearly",
+      name: "Country yearly trend",
+      method: "GET",
+      path: "/temperature/country/{country}/yearly",
+      description: "Path param country + optional year range",
+      params: [
+        { key:"country", label:"country (path)", type:"text", placeholder:"e.g. France", optional:false },
+        { key:"year_min", label:"year_min", type:"number", placeholder:"e.g. 1900", optional:true },
+        { key:"year_max", label:"year_max", type:"number", placeholder:"e.g. 2020", optional:true },
+      ]
+    },
+    {
+      id: "city_yearly",
+      name: "City yearly trend",
+      method: "GET",
+      path: "/temperature/city/yearly",
+      description: "Query params country + city + optional year range",
+      params: [
+        { key:"country", label:"country", type:"text", placeholder:"e.g. France", optional:false },
+        { key:"city", label:"city", type:"text", placeholder:"e.g. Paris", optional:false },
+        { key:"year_min", label:"year_min", type:"number", optional:true },
+        { key:"year_max", label:"year_max", type:"number", optional:true },
+      ]
+    },
+    {
+      id: "decade",
+      name: "Avg temp by decade",
+      method: "GET",
+      path: "/temperature/decade",
+      description: "Optional filters: decade_min, decade_max",
+      params: [
+        { key:"decade_min", label:"decade_min", type:"number", placeholder:"e.g. 1900", optional:true },
+        { key:"decade_max", label:"decade_max", type:"number", placeholder:"e.g. 2010", optional:true },
+      ]
+    },
+    {
+      id: "variability",
+      name: "Variability top cities",
+      method: "GET",
+      path: "/temperature/variability",
+      description: "top_n + optional country",
+      params: [
+        { key:"top_n", label:"top_n", type:"number", placeholder:"20", optional:true, defaultValue:"20" },
+        { key:"country", label:"country", type:"text", placeholder:"e.g. France", optional:true },
+      ]
+    },
+    {
+      id: "trend",
+      name: "Warming trend top cities",
+      method: "GET",
+      path: "/temperature/trend",
+      description: "top_n + optional country",
+      params: [
+        { key:"top_n", label:"top_n", type:"number", placeholder:"20", optional:true, defaultValue:"20" },
+        { key:"country", label:"country", type:"text", placeholder:"e.g. France", optional:true },
+      ]
+    },
+  ];
+
+  function escapeHtml(str){
+    return String(str)
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;");
+  }
+
+  function setStatus(msg, ok=true) {
+    $("status").innerHTML = ok
+      ? `<span class="ok">✅ ${escapeHtml(msg)}</span>`
+      : `<span class="err">❌ ${escapeHtml(msg)}</span>`;
+  }
+
+  function getSessionOrRedirect() {
+    const apiBase = sessionStorage.getItem("apiBase");
+    const apiKey = sessionStorage.getItem("apiKey");
+    const token = sessionStorage.getItem("accessToken");
+    if (!apiBase || !apiKey || !token) {
+      window.location.href = "login.html";
+      return null;
+    }
+    return { apiBase, apiKey, token };
+  }
+
+  function getHeaders() {
+    const sess = getSessionOrRedirect();
+    if (!sess) return null;
+    return {
+      "Authorization": `Bearer ${sess.token}`,
+      "X-API-Key": sess.apiKey,
+    };
+  }
+
+  function renderParamsForm(ep) {
+    const html = ep.params.map(p => {
+      const def = p.defaultValue ?? "";
+      const requiredMark = p.optional ? "" : " • required";
+      return `
+        <div class="field">
+          <label>${escapeHtml(p.label)} <span class="muted">${requiredMark}</span></label>
+          <input id="param_${escapeHtml(p.key)}" type="${p.type === "number" ? "number" : "text"}"
+                 placeholder="${escapeHtml(p.placeholder || "")}" value="${escapeHtml(def)}" />
+        </div>
+      `;
+    }).join("");
+
+    $("paramsArea").innerHTML = html || `<div class="muted" style="margin-top:8px">No parameters</div>`;
+  }
+
+  function buildUrl(ep, apiBase) {
+    const url = new URL(apiBase + ep.path);
+
+    // path param {country}
+    if (ep.path.includes("{country}")) {
+      const v = document.getElementById("param_country")?.value?.trim();
+      if (!v) throw new Error("Missing required param: country (path).");
+      url.pathname = (new URL(apiBase)).pathname.replace(/\/$/, "") + ep.path.replace("{country}", encodeURIComponent(v));
+    }
+
+    // query params
+    for (const p of ep.params) {
+      if (p.key === "country" && ep.path.includes("{country}")) continue; // already used as path
+      const el = document.getElementById("param_" + p.key);
+      if (!el) continue;
+      const value = el.value.trim();
+      if (!value) {
+        if (!p.optional) throw new Error(`Missing required param: ${p.key}`);
+        continue;
+      }
+      url.searchParams.set(p.key, value);
+    }
+
+    return url.toString();
+  }
+
+  function renderResult(data) {
+    $("resultMeta").textContent = Array.isArray(data) ? `${data.length} row(s)` : "object";
+    $("searchBox").value = "";
+
+    // If it's an array of objects -> table
+    if (Array.isArray(data) && data.length && typeof data[0] === "object" && data[0] !== null) {
+      const cols = Object.keys(data[0]);
+      const thead = `<tr>${cols.map(c => `<th>${escapeHtml(c)}</th>`).join("")}</tr>`;
+      const rows = data.map(r => {
+        return `<tr>${cols.map(c => `<td>${escapeHtml(r[c])}</td>`).join("")}</tr>`;
+      }).join("");
+
+      $("result").innerHTML = `
+        <div class="tableWrap">
+          <table>
+            <thead>${thead}</thead>
+            <tbody id="tbody">${rows}</tbody>
+          </table>
+        </div>
+        <pre id="jsonDump" style="display:none">${escapeHtml(JSON.stringify(data, null, 2))}</pre>
+      `;
+      return;
+    }
+
+    // Otherwise JSON
+    $("result").innerHTML = `<pre id="jsonDump">${escapeHtml(JSON.stringify(data, null, 2))}</pre>`;
+  }
+
+  function filterTable() {
+    const q = $("searchBox").value.trim().toLowerCase();
+    const tbody = document.getElementById("tbody");
+    if (!tbody) return;
+    for (const tr of tbody.querySelectorAll("tr")) {
+      const txt = tr.textContent.toLowerCase();
+      tr.style.display = txt.includes(q) ? "" : "none";
+    }
+  }
+
+  async function execute() {
+    const sess = getSessionOrRedirect();
+    if (!sess) return;
+
+    const epId = $("endpointSelect").value;
+    const ep = endpoints.find(e => e.id === epId);
+
+    const headers = getHeaders();
+    if (!headers) return;
+
+    const url = buildUrl(ep, sess.apiBase);
+
+    const res = await fetch(url, { method: ep.method, headers });
+
+    if (!res.ok) {
+      const retryAfter = res.headers.get("Retry-After");
+      const txt = await res.text();
+      const extra = retryAfter ? ` (Retry-After: ${retryAfter}s)` : "";
+      throw new Error(`Request failed ${res.status}${extra}: ${txt}`);
+    }
+
+    const data = await res.json();
+    renderResult(data);
+    setStatus(`${ep.method} ${ep.path} OK`, true);
+
+    // update auth label for convenience
+    $("authLabel").textContent = "ok";
+    $("authLabel").className = "ok";
+  }
+
+  async function checkAuth() {
+    const sess = getSessionOrRedirect();
+    if (!sess) return;
+
+    const headers = getHeaders();
+    const res = await fetch(`${sess.apiBase}/auth/check`, { headers });
+
+    if (!res.ok) {
+      const retryAfter = res.headers.get("Retry-After");
+      const txt = await res.text();
+      const extra = retryAfter ? ` (Retry-After: ${retryAfter}s)` : "";
+      throw new Error(`Auth check failed ${res.status}${extra}: ${txt}`);
+    }
+
+    const data = await res.json();
+    $("authLabel").textContent = `ok (user=${data.user})`;
+    $("authLabel").className = "ok";
+    setStatus("Auth OK.", true);
+  }
+
+  function init() {
+    const sess = getSessionOrRedirect();
+    if (!sess) return;
+
+    $("apiBaseLabel").textContent = sess.apiBase;
+
+    // fill select
+    $("endpointSelect").innerHTML = endpoints.map(e => `<option value="${e.id}">${escapeHtml(e.name)}</option>`).join("");
+
+    // default selection
+    const ep = endpoints[0];
+    $("endpointSelect").value = ep.id;
+    $("pathLabel").textContent = `${ep.method} ${ep.path}`;
+    $("descLabel").textContent = ep.description;
+    renderParamsForm(ep);
+
+    $("endpointSelect").addEventListener("change", () => {
+      const selected = endpoints.find(e => e.id === $("endpointSelect").value);
+      $("pathLabel").textContent = `${selected.method} ${selected.path}`;
+      $("descLabel").textContent = selected.description;
+      renderParamsForm(selected);
+      setStatus("Ready.", true);
+    });
+
+    $("executeBtn").addEventListener("click", async () => {
+      try { await execute(); }
+      catch(e){ setStatus(e.message, false); }
+    });
+
+    $("checkAuthBtn").addEventListener("click", async () => {
+      try { await checkAuth(); }
+      catch(e){ setStatus(e.message, false); $("authLabel").textContent = "not ok"; $("authLabel").className = "muted"; }
+    });
+
+    $("logoutBtn").addEventListener("click", () => {
+      sessionStorage.clear();
+      window.location.href = "login.html";
+    });
+
+    $("goLoginBtn").addEventListener("click", () => {
+      window.location.href = "login.html";
+    });
+
+    $("clearResultBtn").addEventListener("click", () => {
+      $("result").innerHTML = `<div class="muted">—</div>`;
+      $("resultMeta").textContent = "—";
+      setStatus("Cleared.", true);
+    });
+
+    $("copyJsonBtn").addEventListener("click", async () => {
+      const dump = document.getElementById("jsonDump");
+      if (!dump) return setStatus("No JSON to copy.", false);
+      await navigator.clipboard.writeText(dump.textContent);
+      setStatus("JSON copied to clipboard.", true);
+    });
+
+    $("searchBox").addEventListener("input", filterTable);
+
+    setStatus("Ready.", true);
+  }
+
+  init();
+</script>
+</body>
+</html>

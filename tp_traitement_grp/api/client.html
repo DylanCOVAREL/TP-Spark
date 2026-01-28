@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Climate Client</title>
+  <style>
+    body { font-family: system-ui, Arial; max-width: 1000px; margin: 24px auto; padding: 0 12px; }
+    .row { display:flex; gap:12px; flex-wrap:wrap; }
+    input, button { padding:10px; font-size:14px; }
+    input { min-width: 220px; }
+    button { cursor:pointer; }
+    .card { border:1px solid #ddd; border-radius:12px; padding:16px; margin:12px 0; }
+    pre { background:#f6f6f6; padding:12px; border-radius:10px; overflow:auto; }
+    table { width:100%; border-collapse: collapse; }
+    th, td { border-bottom:1px solid #eee; padding:8px; text-align:left; }
+    .ok { color: #0a7; font-weight: 600; }
+    .err { color: #c00; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <h1>Climate Analytics Client</h1>
+
+  <div class="card">
+    <h2>1) Auth</h2>
+    <div class="row">
+      <input id="apiKey" placeholder="X-API-Key (ex: my-super-api-key)" />
+      <input id="username" placeholder="username" value="admin" />
+      <input id="password" placeholder="password" type="password" value="secret" />
+      <button id="loginBtn">Login</button>
+      <button id="checkBtn">Check Auth</button>
+    </div>
+    <p id="authStatus"></p>
+    <pre id="tokenBox" style="display:none"></pre>
+  </div>
+
+  <div class="card">
+    <h2>2) Query</h2>
+    <div class="row">
+      <input id="yearMin" placeholder="year_min (optional)" />
+      <input id="yearMax" placeholder="year_max (optional)" />
+      <button id="loadGlobalBtn">Load /temperature/global/yearly</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Result</h2>
+    <div id="result"></div>
+  </div>
+
+<script>
+  const API_BASE = "http://127.0.0.1:8000";
+
+  let accessToken = null;
+
+  function setStatus(msg, ok=true) {
+    const el = document.getElementById("authStatus");
+    el.className = ok ? "ok" : "err";
+    el.textContent = msg;
+  }
+
+  function getHeaders() {
+    const apiKey = document.getElementById("apiKey").value.trim();
+    if (!apiKey) throw new Error("Missing API Key (X-API-Key).");
+    if (!accessToken) throw new Error("Missing JWT. Click Login first.");
+
+    return {
+      "Authorization": `Bearer ${accessToken}`,
+      "X-API-Key": apiKey,
+    };
+  }
+
+  async function login() {
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
+    if (!username || !password) throw new Error("Missing username/password.");
+
+    // /token expects x-www-form-urlencoded
+    const body = new URLSearchParams({ username, password });
+
+    const res = await fetch(`${API_BASE}/token`, {
+      method: "POST",
+      headers: {"Content-Type": "application/x-www-form-urlencoded"},
+      body
+    });
+
+    if (!res.ok) {
+      const txt = await res.text();
+      throw new Error(`Login failed (${res.status}): ${txt}`);
+    }
+
+    const data = await res.json();
+    accessToken = data.access_token;
+
+    document.getElementById("tokenBox").style.display = "block";
+    document.getElementById("tokenBox").textContent = accessToken;
+
+    setStatus("Logged in ✅ Token stored in memory.", true);
+  }
+
+  async function checkAuth() {
+    const headers = getHeaders();
+    const res = await fetch(`${API_BASE}/auth/check`, { headers });
+
+    if (!res.ok) {
+      const txt = await res.text();
+      throw new Error(`Auth check failed (${res.status}): ${txt}`);
+    }
+
+    const data = await res.json();
+    setStatus(`Auth OK ✅ user=${data.user}`, true);
+  }
+
+  function renderTable(rows) {
+    if (!Array.isArray(rows) || rows.length === 0) return "<p>No data</p>";
+    const cols = Object.keys(rows[0]);
+    const thead = `<tr>${cols.map(c => `<th>${c}</th>`).join("")}</tr>`;
+    const tbody = rows.map(r => `<tr>${cols.map(c => `<td>${r[c]}</td>`).join("")}</tr>`).join("");
+    return `<table><thead>${thead}</thead><tbody>${tbody}</tbody></table>`;
+  }
+
+  async function loadGlobalYearly() {
+    const headers = getHeaders();
+
+    const yearMin = document.getElementById("yearMin").value.trim();
+    const yearMax = document.getElementById("yearMax").value.trim();
+
+    const url = new URL(`${API_BASE}/temperature/global/yearly`);
+    if (yearMin) url.searchParams.set("year_min", yearMin);
+    if (yearMax) url.searchParams.set("year_max", yearMax);
+
+    const res = await fetch(url.toString(), { headers });
+
+    if (!res.ok) {
+      const txt = await res.text();
+      throw new Error(`Request failed (${res.status}): ${txt}`);
+    }
+
+    const data = await res.json();
+    document.getElementById("result").innerHTML = renderTable(data);
+  }
+
+  document.getElementById("loginBtn").addEventListener("click", async () => {
+    try { await login(); }
+    catch (e) { setStatus(e.message, false); }
+  });
+
+  document.getElementById("checkBtn").addEventListener("click", async () => {
+    try { await checkAuth(); }
+    catch (e) { setStatus(e.message, false); }
+  });
+
+  document.getElementById("loadGlobalBtn").addEventListener("click", async () => {
+    try { await loadGlobalYearly(); }
+    catch (e) { document.getElementById("result").innerHTML = `<p class="err">${e.message}</p>`; }
+  });
+</script>
+</body>
+</html>
