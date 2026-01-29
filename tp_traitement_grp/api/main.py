@@ -47,10 +47,10 @@ ACCESS_TOKEN_EXPIRE_SECONDS = int(os.environ.get("ACCESS_TOKEN_EXPIRE_SECONDS", 
 
 # Demo user credentials
 API_USER = os.environ.get("API_USER", "admin")
-API_PASS = os.environ.get("API_PASS", "secret")
+API_PASS = os.environ.get("API_PASS", "API_PASS")
 
 # API KEY (app-level auth)
-API_KEY = os.environ.get("API_KEY", "my-super-api-key")
+API_KEY = os.environ.get("API_KEY", "boss123456789")
 API_KEY_NAME = "X-API-Key"
 
 # Quota / Rate limit (per API key)
